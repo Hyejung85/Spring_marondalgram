@@ -50,7 +50,7 @@
 				var password = $("#passwordInput").val();
 				var passwordCheck = $("#passwordCheckInput").val();
 				var name = $("#nameInput").val().trim();
-				var email = $("#emailInput").val().trim;
+				var email = $("#emailInput").val().trim();
 				
 				if(loginId == null || loginId == ""){
 					alert("아이디를 입력해주세요");
