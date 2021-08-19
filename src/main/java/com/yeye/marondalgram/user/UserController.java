@@ -12,13 +12,13 @@ public class UserController {
 	// 로그인
 	@GetMapping("/signin_view")
 	public String signin() {
-		return "marondalgram/user/signin";
+		return "marondalgram/user/sign_in";
 	}
 	
 	// 회원 가입
 	@GetMapping("/signup_view")
 	public String signup() {
-		return "marondalgram/user/signup";
+		return "marondalgram/user/sign_up";
 	}
 	
 }

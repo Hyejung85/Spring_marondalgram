@@ -22,17 +22,19 @@
 				<div class="login-box h-75 d-flex justify-content-center align-items-center">
 					 <div class="w-75">
 						<h1 class="text-center mt-3">Sign Up</h1>
-						<input type="text" class="form-control mt-3" placeholder="아이디" id="loginIdInput">
-						<input type="password" class="form-control mt-2" placeholder="비밀번호" id="passwordInput">
+						<form method="post" action="/marondalgram/user/sign_up" id="signupForm">
+						<input type="text" class="form-control mt-3" placeholder="아이디" id="loginIdInput" name="loginId">
+						<input type="password" class="form-control mt-2" placeholder="비밀번호" id="passwordInput" name="password">
 						<input type="password" class="form-control mt-2" placeholder="비밀번호 확인" id="passwordCheckInput">
 						<div id="errorPassword" class="text-danger d-none"><small>비밀번호가 일치하지 않습니다.</small></div>
-						<input type="text" class="form-control mt-2" placeholder="이름" id="nameInput">
-						<input type="text" class="form-control mt-2" placeholder="이메일" id="emailInput">
+						<input type="text" class="form-control mt-2" placeholder="이름" id="nameInput" name="name">
+						<input type="text" class="form-control mt-2" placeholder="이메일" id="emailInput" name="email">
 					</div>
 			   </div>
-				<div class="sub-box d-flex justify-content-center w-100">
-					<button type="submit" class="btn btn-block text-white mt-3 w-75" id="signupBtn">가입하기</button>
-				</div>
+						<div class="sub-box d-flex justify-content-center w-100">
+							<button type="submit" class="btn btn-block text-white mt-3 w-75" id="signupBtn">가입하기</button>
+						</div>
+				</form>
 			 </div>
 			</div>
 		</section>
@@ -40,10 +42,13 @@
 	</div>
 	<script>
 		$(document).ready(function(){
-			$("#signupBtn").on("click",function(){
+			$("#signupForm").on("submit",function(e){
+				
+				e.preventDefault();
+				
 				var loginId = $("#loginIdInput").val();
 				var password = $("#passwordInput").val();
-				var passwordCheck = $("passwordCheckInput").val();
+				var passwordCheck = $("#passwordCheckInput").val();
 				var name = $("#nameInput").val().trim();
 				var email = $("#emailInput").val().trim;
 				
@@ -66,6 +71,25 @@
 				if(password != passwordCheck){
 					$("#errorPassword").removeClass("d-none");
 				}
+				
+				$.ajax({
+					type:"post",
+					url:"/marondalgram/user/sign_up",
+					data:{"loginId":loginId, "password":password, "name":name, "email": email},
+					success:function(data){
+						if(data.result == "success"){
+							alert("회원가입성공 /n 로그인 화면으로 이동합니다.");
+							location.href = "/marondalgram/user/signin_view";
+						}else{
+							alert("회원가입 실패");
+						}
+					},
+					error:function(e){
+						alert("회원가입 실패");
+					}
+		
+				});
+				return false;
 			});
 			
 		});
