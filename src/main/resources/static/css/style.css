@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+#wrap {
+	height: 800px;
+	width:1200px;
+	margin:auto;
+}
+
+header {
+	height: 70px;
+	background-color: #8b68fc;
+
+}
+
+section {
+	height: 500px;
+	background-color: #e5defc;
+}
+
+.signin-box {
+	width:400px;
+	background-color: #f1edfc;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #f2f7f4
+}
+
+
+.sub-box {
+	width:400px;
+	background-color: #f1edfc;
+}
+
+.btn {
+	background-color: #8b68fc;
+}
+
+footer {
+	height: 50px;
+	background-color: #8b68fc;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #f2f7f4;
+}
