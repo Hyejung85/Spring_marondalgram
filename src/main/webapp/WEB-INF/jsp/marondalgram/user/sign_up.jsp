@@ -23,7 +23,16 @@
 					 <div class="w-75">
 						<h1 class="text-center mt-3">Sign Up</h1>
 						<form method="post" action="/marondalgram/user/sign_up" id="signupForm">
-						<input type="text" class="form-control mt-3" placeholder="아이디" id="loginIdInput" name="loginId">
+						<div class="d-flex mt-3">
+							<input type="text" class="form-control mt-3" placeholder="아이디" id="loginIdInput" name="loginId">
+							<button type="button" class="btn btn-sm mt-3" id="idDuplicateBtn">중복확인</button>
+						</div>
+						<div class="text-success d-none" id="noneDuplicateDiv">
+							<small>사용 가능한 아이디입니다.</small>
+						</div>
+						<div class="text-danger d-none" id="duplicateDiv">
+							<small>중복된 아이디입니다.</small>
+						</div>
 						<input type="password" class="form-control mt-2" placeholder="비밀번호" id="passwordInput" name="password">
 						<input type="password" class="form-control mt-2" placeholder="비밀번호 확인" id="passwordCheckInput">
 						<div id="errorPassword" class="text-danger d-none"><small>비밀번호가 일치하지 않습니다.</small></div>
@@ -78,7 +87,7 @@
 					data:{"loginId":loginId, "password":password, "name":name, "email": email},
 					success:function(data){
 						if(data.result == "success"){
-							alert("회원가입성공 /n 로그인 화면으로 이동합니다.");
+							alert("회원가입성공! 로그인 화면으로 이동합니다.");
 							location.href = "/marondalgram/user/signin_view";
 						}else{
 							alert("회원가입 실패");
