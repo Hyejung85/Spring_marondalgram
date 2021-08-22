@@ -19,13 +19,13 @@
 		<section class="d-flex justify-content-center">
 			<div class="signin-box d-flex justify-content-center align-items-center mt-3 mb-3">
 			 <div class="h-100 w-100">
-				<div class="login-box h-75 d-flex justify-content-center align-items-center">
+				<div class="signup-box h-75 d-flex justify-content-center align-items-center">
 					 <div class="w-75">
 						<h1 class="text-center mt-3">Sign Up</h1>
 						<form method="post" action="/marondalgram/user/sign_up" id="signupForm">
 						<div class="d-flex mt-3">
 							<input type="text" class="form-control mt-3" placeholder="아이디" id="loginIdInput" name="loginId">
-							<button type="button" class="btn btn-sm mt-3" id="idDuplicateBtn">중복확인</button>
+							<button type="button" class="btn btn-sm mt-3 ml-2 text-white" id="idDuplicateBtn">중복확인</button>
 						</div>
 						<div class="text-success d-none" id="noneDuplicateDiv">
 							<small>사용 가능한 아이디입니다.</small>
@@ -51,6 +51,10 @@
 	</div>
 	<script>
 		$(document).ready(function(){
+			
+			var isIdCheck = false;
+			var isDuplicate = true;
+			
 			$("#signupForm").on("submit",function(e){
 				
 				e.preventDefault();
@@ -81,6 +85,18 @@
 					$("#errorPassword").removeClass("d-none");
 				}
 				
+				
+				// 아이디 중복체크를 했는지?
+				if(isIdCheck == false){
+					alert("아이디 중복체크를 진행해주세요");
+				}
+				
+				// 아이디가 중복되었는지, 되지 않았는지?
+				if(isDuplicate == true){
+					alert("아이디가 중복되었습니다");
+				}
+				
+							
 				$.ajax({
 					type:"post",
 					url:"/marondalgram/user/sign_up",
@@ -99,6 +115,38 @@
 		
 				});
 				return false;
+			});
+			
+			$("#idDuplicateBtn").on("click",function(){
+				var loginId = $("#loginIdInput").val();
+				
+				if(loginId == null || loginId ==""){
+					alert("아이디를 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"get",
+					url:"/marondalgram/user/is_duplicate_id",
+					data:{"loginId":loginId},
+					success:function(data){
+						isIdCheck = true;
+						
+						if(data.is_duplicate){
+							isDuplicate = true;
+							$("#duplicateDiv").removeClass("d-none");
+							$("#noneDuplicateDiv").addClass("d-none");
+						}else{
+							isDuplicate = false;	
+							$("#duplicateDiv").addClass("d-none");
+							$("#noneDuplicateDiv").removeClass("d-none");
+						}
+					},
+					error:function(e){
+						alert("아이디 중복확인 실패!!");
+					}
+					
+				});
 			});
 			
 		});

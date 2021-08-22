@@ -17,14 +17,20 @@
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/marondalgram/include/header.jsp" />
 		<section class="d-flex justify-content-center">
-			<div class="signin-box d-flex justify-content-center align-items-center mt-3 mb-3">
+		 <div class="d-flex">
+			<div class="img-box mt-3 mb-3">
+				<img class="image-thumbnail" src="https://cdn.pixabay.com/photo/2013/07/25/01/33/boat-166738_960_720.jpg">
+			</div>
+			<div class="signin-box d-flex justify-content-center align-items-center mt-3 mb-3 ml-1">
 			 <div class="h-100 w-100">
 				<div class="login-box h-75 d-flex justify-content-center align-items-center">
 				 <div class="w-75">
 					<h1 class="text-center">Log-In</h1>
+					<form id="loginForm">
 					<input type="text" class="form-control mt-3" placeholder="아이디" id="loginIdInput">
 					<input type="password" class="form-control mt-2" placeholder="비밀번호" id="passwordInput">
 					<button type="submit" class="btn btn-block text-white mt-3" id="loginBtn">로그인</button>
+					</form>
 					<hr>
 					<div  class="text-center"><a href="#">비밀번호를 잊으셨나요?</a></div>
 				 </div>
@@ -35,14 +41,16 @@
 				</div>
 			 </div>
 			</div>
-		
+		 </div>
 		</section>
 		<c:import url="/WEB-INF/jsp/marondalgram/include/footer.jsp" />
 	</div>
 	
 	<script>
 	$(document).ready(function(){
-		$("#loginBtn").on("click",function(){
+		$("#loginBtn").on("click",function(e){
+			
+			e.preventDefault();
 			
 		var loginId = $("#loginIdInput").val();
 		var password = $("#passwordInput").val();
@@ -54,6 +62,22 @@
 			alert("비밀번호를 입력해주세요");
 			return;
 		}
+		
+		$.ajax({
+			type:"post",
+			url:"/marondalgram/user/sign_in",
+			data:{"loginId":loginId, "password":password},
+			success:function(data){
+				if(data.result =="success"){
+					alert("로그인 성공");
+				}else{
+					alert("아이디 또는 비밀번호를 확인해주세요");
+				}
+			},
+			error:function(e){
+				alert("로그인 실패!!!");
+			}
+		});
 		});
 		
 	});
