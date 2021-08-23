@@ -17,11 +17,11 @@
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/marondalgram/include/header.jsp" />
 		<section class="d-flex justify-content-center">
-		 <div class="d-flex">
-			<div class="img-box mt-3 mb-3">
-				<img class="image-thumbnail" src="https://cdn.pixabay.com/photo/2013/07/25/01/33/boat-166738_960_720.jpg">
+		 <div class="d-flex section-box mt-4 mb-4">
+			<div class="img-box">
+				<img class="image-thumbnail" src="https://cdn.pixabay.com/photo/2017/05/15/16/58/blue-2315434_960_720.jpg">
 			</div>
-			<div class="signin-box d-flex justify-content-center align-items-center mt-3 mb-3 ml-1">
+			<div class="signin-box d-flex justify-content-center align-items-center">
 			 <div class="h-100 w-100">
 				<div class="login-box h-75 d-flex justify-content-center align-items-center">
 				 <div class="w-75">

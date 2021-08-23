@@ -17,7 +17,11 @@
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/marondalgram/include/header.jsp" />
 		<section class="d-flex justify-content-center">
-			<div class="signin-box d-flex justify-content-center align-items-center mt-3 mb-3">
+		 <div class="section-box d-flex mt-4 mb-4">
+			<div class="img-box">
+				<img class="image-thumbnail" src="https://cdn.pixabay.com/photo/2017/05/15/16/58/blue-2315434_960_720.jpg">
+			</div>
+			<div class="d-flex justify-content-center align-items-center">
 			 <div class="h-100 w-100">
 				<div class="signup-box h-75 d-flex justify-content-center align-items-center">
 					 <div class="w-75">
@@ -39,13 +43,14 @@
 						<input type="text" class="form-control mt-2" placeholder="이름" id="nameInput" name="name">
 						<input type="text" class="form-control mt-2" placeholder="이메일" id="emailInput" name="email">
 					</div>
-			   </div>
-						<div class="sub-box d-flex justify-content-center w-100">
-							<button type="submit" class="btn btn-block text-white mt-3 w-75" id="signupBtn">가입하기</button>
+			    </div>
+						<div class="sub-box d-flex justify-content-center w-100 h-25">
+							<button type="submit" class="btn btn-block text-white mt-3 w-75 h-50" id="signupBtn">가입하기</button>
 						</div>
 				</form>
 			 </div>
 			</div>
+		 </div>
 		</section>
 		<c:import url="/WEB-INF/jsp/marondalgram/include/footer.jsp" />
 	</div>
