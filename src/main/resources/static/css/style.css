@@ -39,18 +39,18 @@ section {
 }
 
 .signin-box {
-	width:370px;
+	width:350px;
 	background-color: #f1edfc;
 }
 
 .signup-box {
-	width:370px;
+	width:350px;
 	background-color: #f1edfc;
 
 }
 
 .sub-box {
-	width:370px;
+	width:350px;
 	background-color: #f1edfc;
 }
 
@@ -63,4 +63,5 @@ footer {
 	color: #764cfc;
 	background-color: white;
 	border-top: 1px solid #8b68fc;
+	border-bottom: 2px solid #8b68fc;
 }

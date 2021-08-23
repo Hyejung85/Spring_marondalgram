@@ -19,7 +19,7 @@
 		<section class="d-flex justify-content-center">
 		 <div class="d-flex section-box mt-4 mb-4">
 			<div class="img-box">
-				<img class="image-thumbnail" src="https://cdn.pixabay.com/photo/2017/05/15/16/58/blue-2315434_960_720.jpg">
+				<img class="image-thumbnail" id="image-thumbnail" src="https://cdn.pixabay.com/photo/2017/05/15/16/58/blue-2315434_960_720.jpg">
 			</div>
 			<div class="signin-box d-flex justify-content-center align-items-center">
 			 <div class="h-100 w-100">
@@ -48,6 +48,21 @@
 	
 	<script>
 	$(document).ready(function(){
+		
+		var bannerList = ["https://cdn.pixabay.com/photo/2017/05/15/16/58/blue-2315434_960_720.jpg"
+			,"https://cdn.pixabay.com/photo/2017/10/07/11/04/dadaepo-beach-2826171_960_720.jpg"
+			,"https://cdn.pixabay.com/photo/2017/03/27/14/49/beach-2179183_960_720.jpg"
+			,"https://cdn.pixabay.com/photo/2018/02/08/22/27/flower-3140492_960_720.jpg"]
+		var currentImageIndex = 0;
+		setInterval(function(){
+			$("#image-thumbnail").attr("src", bannerList[currentImageIndex]);
+			currentImageIndex++;
+			
+			if(currentImageIndex == bannerList.length){
+				currentImageIndex = 0;
+			}
+		}, 3000);
+		
 		$("#loginBtn").on("click",function(e){
 			
 			e.preventDefault();
