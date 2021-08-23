@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 #wrap {
-	height: 800px;
 	width:1200px;
 	margin:auto;
 }
@@ -56,6 +55,29 @@ section {
 
 .btn {
 	background-color: #8b68fc;
+	color:white;
+}
+
+.create-post-box{
+	width:500px;
+	background-color: #f1edfc;
+	border-style: solid;
+	border-width: 1px;
+	border-color:  #8b68fc;
+}
+
+.timeline-box{
+	width:500px;
+	background-color: #f1edfc;
+	border-style: solid;
+	border-width: 1px;
+	border-color:  #8b68fc;
+}
+
+.timeline-img-box{
+	width:450px;
+	overflow:hidden;
+    margin:0 auto;
 }
 
 footer {
