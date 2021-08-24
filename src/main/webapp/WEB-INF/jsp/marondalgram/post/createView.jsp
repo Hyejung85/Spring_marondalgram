@@ -52,15 +52,15 @@
 			  alert("내용을 입력해주세요");
 		  }
 		  var formData = new FormData();
-		  formdata.append("content", content);
-		  formdata.append("file", $("#fileInput")[0].files[0]);
+		  formData.append("content", content);
+		  formData.append("file", $("#fileInput")[0].files[0]);
 		  
 		  $.ajax({
-			  enctype:"multipart/form-data",
-			  type:"post",
+			  enctype:"multipart/form-data",//파일 업로드 필수
+			  type:"POST",
 			  url:"/marondalgram/post/create",
-			  processData:false,
-			  contentType:false,
+			  processData:false,//파일 업로드 필수
+			  contentType:false,//파일 업로드 필수
 			  data:formData,
 			  success:function(data){
 				  if(data.result == "success"){
@@ -76,6 +76,7 @@
 		 
 		 });
 	 });
+	 
 	</script>
 
 </body>

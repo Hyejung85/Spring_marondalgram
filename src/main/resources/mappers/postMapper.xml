@@ -9,6 +9,7 @@
 			`post`
 		(	
 			`userId`
+			, `userName`
 			, `content`
 			, `imagePath`
 			, `createdAt`
@@ -16,6 +17,7 @@
 		) VALUES 
 		(
 			#{userId}
+			, #{userName}
 			, #{content}
 			, #{imagePath}
 			, now()

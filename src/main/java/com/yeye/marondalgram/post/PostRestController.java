@@ -22,19 +22,20 @@ public class PostRestController {
 	@Autowired
 	private PostBO postBO;
 	
-	@PostMapping("/create")
+	@RequestMapping("/create")
 	public Map<String, String> create(
-			@RequestParam("content") String content
+			@RequestParam(value="content", required=false) String content
 			,@RequestParam(value="file", required=false) MultipartFile file
 			, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
 		
 		// getAttribute는 리턴타입이 object이므로 Integer로 캐스팅한다.
-		int userId = (Integer) session.getAttribute("userId");
+		int userId = (Integer)session.getAttribute("userId");
+		String userName = (String)session.getAttribute("userName");
 		
-		// userId, title, content, file
-		int count = postBO.addPost(userId, content, file);
+		// userId, content, file
+		int count = postBO.addPost(userId, userName, content, file);
 		
 		Map<String, String> result = new HashMap<>();
 		if(count == 1){
