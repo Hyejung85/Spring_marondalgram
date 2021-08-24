@@ -19,7 +19,7 @@
 		<section class="d-flex justify-content-center">
 			<div class="create-timeline-box">
 				<div class="create-post-box p-3 m-2">
-					<b>New Posting</b>
+					<sapn class="title-text"><h5>New Posting</h5></span>
 					<textarea class="form-control" rows="3" id="contentInput"></textarea>
 					<div class="d-flex justify-content-between mt-2">
 						<input type="file" accept="image/*" id="fileInput">

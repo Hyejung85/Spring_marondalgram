@@ -80,6 +80,10 @@ section {
     margin:0 auto;
 }
 
+.title-text{
+	color: #764cfc;
+}
+
 footer {
 	height: 50px;
 	color: #764cfc;
