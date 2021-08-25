@@ -31,6 +31,7 @@ public class PostController {
 	public String postList(Model model) {
 		
 		List<Post> postList = postBO.getPostList();
+		
 		model.addAttribute("postList", postList);
 		return "marondalgram/post/createView";
 	}

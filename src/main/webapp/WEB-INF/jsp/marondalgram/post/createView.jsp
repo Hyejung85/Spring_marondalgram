@@ -40,15 +40,16 @@
 						<img class="image-thumbnail" src="${post.imagePath }">
 						</c:if>
 					</div>
-					<div class="mx-3 title-text">${post.content }</div>
-					<hr>
+					<div class="post-content-box my-2 title-text">
+						<div class="mx-3 mb-2 "> ${post.content } </div>
+					</div>
+					
 					<div class="like-comment-box mt-2 mx-3">
-						<div class="title-text"><i class="bi bi-suit-heart-fill"></i> 10개</div>
-						<div class="mt-2"> 아이디 코멘트</div>
+						<div class="title-text pb-2"><h5><i class="bi bi-suit-heart-fill"></i> 10개</h5></div>
+						<div class="mt-2"> <span class="title-text"><b>아이디</b></span> 코멘트</div>
 						<div class="mt-2 d-flex input-group">
-							<span class="title-text d-flex align-items-center"><b>comment</b></span>
-							<input type="text" class="form-control ml-2"> 
-							<button type="button" class="btn btn-sm ml-1">저장</button>
+							<input type="text" class="form-control ml-1 title-text" placeholder="comment"> 
+							<button type="button" class="btn">저장</button>
 						</div>
 					</div>
 				</div>

@@ -10,7 +10,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/images/**") // 내가 url로 접근하고 싶은 path /images/10_1111111/test.png
-		.addResourceLocations("C:\\Users\\82109\\Desktop\\spring\\spring_test\\upload\\marondalgram\\images/");
+		.addResourceLocations("file:///C:\\Users\\82109\\Desktop\\spring\\spring_test\\upload\\marondalgram\\images/");
 	}
 	
 }

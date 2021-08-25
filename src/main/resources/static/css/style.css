@@ -87,9 +87,8 @@ header {
 	color: #764cfc;
 }
 
-hr{
-	height:0px;
-	background-color: #764cfc;
+.post-content-box{
+	border-bottom: 1px solid #8b68fc;
 }
 
 footer {
