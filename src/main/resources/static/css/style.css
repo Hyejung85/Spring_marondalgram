@@ -14,8 +14,11 @@ header {
 
 }
 
-section {
-	height: 500px;
+.sign-section {
+	height: 600px;
+	background-color: #e5defc;
+}
+.timeline-section {
 	background-color: #e5defc;
 }
 
@@ -82,6 +85,11 @@ section {
 
 .title-text{
 	color: #764cfc;
+}
+
+hr{
+	height:0px;
+	background-color: #764cfc;
 }
 
 footer {

@@ -1,12 +1,14 @@
 package com.yeye.marondalgram.post;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yeye.marondalgram.post.bo.PostBO;
+import com.yeye.marondalgram.post.model.Post;
 
 @RestController
 @RequestMapping("/marondalgram/post")
@@ -22,6 +25,7 @@ public class PostRestController {
 	@Autowired
 	private PostBO postBO;
 	
+	// 포스트 작성
 	@RequestMapping("/create")
 	public Map<String, String> create(
 			@RequestParam(value="content", required=false) String content
@@ -44,9 +48,6 @@ public class PostRestController {
 			result.put("result", "fail");
 		}
 		return result;
-		
-		
 	}
 	
-
 }

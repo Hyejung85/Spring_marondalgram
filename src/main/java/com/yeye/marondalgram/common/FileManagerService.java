@@ -14,7 +14,7 @@ public class FileManagerService {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private final String FILE_UPLOAD_PATH = "C:\\Users\\82109\\Desktop\\spring\\spring_test\\upload\\marondalgram\\images/";
-
+	
 	// 파일 업로드
 	public String saveFile(int userId, MultipartFile file) {
 		

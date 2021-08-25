@@ -16,8 +16,8 @@
 <body>
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/marondalgram/include/header.jsp" />
-		<section class="d-flex justify-content-center">
-		 <div class="section-box d-flex mt-4 mb-4">
+		<section class="sign-section d-flex justify-content-center">
+		 <div class="section-box d-flex my-5">
 			<div class="img-box">
 				<img class="image-thumbnail" id="image-thumbnail" src="https://cdn.pixabay.com/photo/2017/05/15/16/58/blue-2315434_960_720.jpg">
 			</div>

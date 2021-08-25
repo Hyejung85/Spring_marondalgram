@@ -11,12 +11,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/marondalgram/include/header.jsp" />
-		<section class="d-flex justify-content-center">
+		<section class="timeline-section d-flex justify-content-center">
 			<div class="create-timeline-box">
 				<div class="create-post-box p-3 m-2">
 					<sapn class="title-text"><h5>New Posting</h5></span>
@@ -26,19 +27,34 @@
 						<button type="button" class="btn btn-sm" id="saveBtn">공유하기</button>
 					</div>
 				</div>
-				<div class="timeline-box p-3 m-2"> <!-- 반복 -->
-					<div class="d-flex justify-content-between">
-						<div>게시자 아이디</div>
-						<div>삭제 -- 햄버거 버튼</div>
+				
+				<!-- 반복 시작-->
+				<c:forEach var="post" items="${postList }" varStatus="status">
+				<div class="timeline-box p-3 m-2"> 
+					<div class="d-flex justify-content-between ml-3 mr-2">
+						<div class="title-text"><i class="bi bi-person-circle"></i></i> <b>${post.userName }</b></div>
+						<div class="title-text"><i class="bi bi-three-dots"></i></div>
 					</div>
-					<div class="timeline-img-box">
-						<img src="#" class="image-thumbnail">
+					<div class="timeline-img-box mt-2 mx-3">
+						<c:if test="${not empty post.imagePath }">
+						<img class="image-thumbnail" src="${post.imagePath }">
+						</c:if>
 					</div>
-					<div class="like-comment-box">
-						<div>좋아요</div>
-						<div>comment</div>
+					<div class="mx-3 title-text">${post.content }</div>
+					<hr>
+					<div class="like-comment-box mt-2 mx-3">
+						<div class="title-text"><i class="bi bi-suit-heart-fill"></i> 10개</div>
+						<div class="mt-2"> 아이디 코멘트</div>
+						<div class="mt-2 d-flex input-group">
+							<span class="title-text d-flex align-items-center"><b>comment</b></span>
+							<input type="text" class="form-control ml-2"> 
+							<button type="button" class="btn btn-sm ml-1">저장</button>
+						</div>
 					</div>
 				</div>
+				</c:forEach>
+				<!-- 반복 끝-->
+				
 			</div>	
 		</section>
 		<c:import url="/WEB-INF/jsp/marondalgram/include/footer.jsp" />

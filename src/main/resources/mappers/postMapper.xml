@@ -24,5 +24,18 @@
 			, now()
 		)
 	</insert>
+	<select id="selectPostList" resultType="com.yeye.marondalgram.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `userName`
+			, `content`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		ORDER BY `id` DESC
+	</select>
 
 </mapper>

@@ -16,8 +16,8 @@
 <body>
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/marondalgram/include/header.jsp" />
-		<section class="d-flex justify-content-center">
-		 <div class="d-flex section-box mt-4 mb-4">
+		<section class="sign-section d-flex justify-content-center">
+		 <div class="d-flex section-box my-5">
 			<div class="img-box">
 				<img class="image-thumbnail" id="image-thumbnail" src="https://cdn.pixabay.com/photo/2017/05/15/16/58/blue-2315434_960_720.jpg">
 			</div>
@@ -84,7 +84,8 @@
 			data:{"loginId":loginId, "password":password},
 			success:function(data){
 				if(data.result =="success"){
-					alert("로그인 성공");
+					//alert("로그인 성공");
+					location.href="/marondalgram/post/timeline";
 				}else{
 					alert("아이디 또는 비밀번호를 확인해주세요");
 				}
