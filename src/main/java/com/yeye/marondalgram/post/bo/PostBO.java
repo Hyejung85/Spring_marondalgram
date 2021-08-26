@@ -35,9 +35,11 @@ public class PostBO {
 		return postDAO.insertPost(userId, userName, content, filePath);
 	}
 	
-	// 리스트
+	// 포스팅 리스트
 	public List<Post> getPostList() {
 		return postDAO.selectPostList();
 		
 	}
+	
+	
 }

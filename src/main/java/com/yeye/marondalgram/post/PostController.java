@@ -23,17 +23,19 @@ public class PostController {
 	
 	//@GetMapping("/timeline")
 	//public String createView() {
-	//	return "marondalgram/post/createView";
+	//	return "marondalgram/post/timeline";
 	//}
 	
-	// 리스트
+	// 포스팅 리스트
 	@GetMapping("/timeline")
 	public String postList(Model model) {
 		
 		List<Post> postList = postBO.getPostList();
 		
 		model.addAttribute("postList", postList);
-		return "marondalgram/post/createView";
+		return "marondalgram/post/timeline";
 	}
+	
+	
 
 }

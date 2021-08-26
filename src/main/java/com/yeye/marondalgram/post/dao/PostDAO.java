@@ -17,7 +17,8 @@ public interface PostDAO {
 			, @Param("content") String content
 			, @Param("imagePath") String imagePath);
 	
-	// 리스트
+	// 포스팅 리스트
 	public List<Post> selectPostList();
 
+	
 }
