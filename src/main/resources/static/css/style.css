@@ -22,11 +22,6 @@ header {
 	background-color: #e5defc;
 }
 
-.section-box{
-	border-style: solid;
-	border-width: 1px;
-	border-color:  #8b68fc;
-}
 
 .img-box {
 	width:350px;
@@ -64,17 +59,11 @@ header {
 .create-post-box{
 	width:500px;
 	background-color: #f1edfc;
-	border-style: solid;
-	border-width: 1px;
-	border-color:  #8b68fc;
 }
 
 .timeline-box{
 	width:500px;
 	background-color: #f1edfc;
-	border-style: solid;
-	border-width: 1px;
-	border-color:  #8b68fc;
 }
 
 .timeline-img-box{

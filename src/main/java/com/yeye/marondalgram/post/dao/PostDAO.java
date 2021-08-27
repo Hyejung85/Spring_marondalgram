@@ -20,5 +20,4 @@ public interface PostDAO {
 	// 포스팅 리스트
 	public List<Post> selectPostList();
 
-	
 }

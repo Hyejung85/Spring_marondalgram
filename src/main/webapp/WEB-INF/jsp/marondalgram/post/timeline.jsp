@@ -20,7 +20,8 @@
 		<section class="timeline-section d-flex justify-content-center">
 			<div class="create-timeline-box">
 				<!--  포스트 입력 박스 -->
-				<div class="create-post-box p-3 m-2 border rounded">
+				<c:if test="${not empty userName }" >
+				<div class="create-post-box p-3 m-2 border rounded" id="create-post-box">
 					<sapn class="title-text"><h5>New Posting</h5></span>
 					<textarea class="form-control border-0 non-resize" rows="3" id="contentInput"></textarea>
 					<div class="d-flex justify-content-between mt-2">
@@ -29,19 +30,18 @@
 						<button type="button" class="btn btn-sm" id="saveBtn">업로드</button>
 					</div>
 				</div>
+				</c:if>
 				<!--  포스트 입력 박스 -->
 				
 				<!-- 타임라인 -->
 				<c:forEach var="post" items="${postList }" varStatus="status">
 				<div class="timeline-box p-3 m-2 border rounded""> 
-					<div class="d-flex justify-content-between ml-3 mr-2">
+					<div class="d-flex justify-content-between ml-2 mr-2">
 						<div class="title-text"><i class="bi bi-person-circle"></i> <b>${post.userName }</b></div>
 						<div class="title-text"><i class="bi bi-three-dots"></i></div>
 					</div>
 					<div class="timeline-img-box mt-2 mx-2">
-						<c:if test="${not empty post.imagePath }">
 						<img class="image-thumbnail" src="${post.imagePath }" id="imagePath">
-						</c:if>
 					</div>
 					<div class="post-content-box my-2 title-text">
 						<div class="mx-3 mb-2 "> ${post.content } </div>
@@ -57,7 +57,7 @@
 						<!--  코멘트 입력 -->
 						<div class="mt-2 d-flex input-group">
 							<input type="text" class="commentBox form-control title-text border-0" placeholder="comment" id="commentInput-${post.id }"> 
-							<button type="button" class="btn commentBtn" data-post-id="${post.id }">게시</button>
+							<button type="button" class="btn commentBtn btn-sm" data-post-id="${post.id }">게시</button>
 						</div>
 						<!--  /코멘트 입력 -->
 					</div>
@@ -102,7 +102,7 @@
 				  
 				  if(data.result == "success"){
 					  alert("포스팅 성공");
-					  location.href="/marondalgram/post/timeline";
+					  location.reload();
 				  }else{
 					  alert("포스팅 실패");
 				  }
@@ -120,11 +120,12 @@
 			
 			 var postId = $(this).data("post-id");
 			 var comment = $("#commentInput-"+ postId).val().trim(); 
-
+			 
 			 if(comment == null || comment ==""){
 				 alert("코멘트를 입력하세요");
 				 return;
 			 }
+			 
 			 
 			 $.ajax({
 				type:"get",
