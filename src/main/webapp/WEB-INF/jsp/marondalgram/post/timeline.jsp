@@ -23,28 +23,32 @@
 				<c:if test="${not empty userName }" >
 				<div class="create-post-box p-3 m-2 border rounded" id="create-post-box">
 					<sapn class="title-text"><h5>New Posting</h5></span>
+					<!-- 포스팅 내용 입력 -->
 					<textarea class="form-control border-0 non-resize" rows="3" id="contentInput"></textarea>
+					<!-- /포스팅 내용 입력 -->
+					<!-- 파일 업로드 -->
 					<div class="d-flex justify-content-between mt-2">
 						<input type="file" accept="image/*" id="fileInput" class="d-none">
 						<a href="#" id="imageUploadBtn"><i class="bi bi-file-earmark-image title-text"></i></a>
 						<button type="button" class="btn btn-sm" id="saveBtn">업로드</button>
 					</div>
+					<!-- /파일 업로드 -->
 				</div>
 				</c:if>
 				<!--  포스트 입력 박스 -->
 				
 				<!-- 타임라인 -->
-				<c:forEach var="post" items="${postList }" varStatus="status">
-				<div class="timeline-box p-3 m-2 border rounded""> 
+				<c:forEach var="postWithComment" items="${postList }" varStatus="status">
+				<div class="timeline-box p-3 m-2 border rounded"> 
 					<div class="d-flex justify-content-between ml-2 mr-2">
-						<div class="title-text"><i class="bi bi-person-circle"></i> <b>${post.userName }</b></div>
+						<div class="title-text"><i class="bi bi-person-circle"></i> <b>${postWithComment.post.userName }</b></div>
 						<div class="title-text"><i class="bi bi-three-dots"></i></div>
 					</div>
-					<div class="timeline-img-box mt-2 mx-2">
-						<img class="image-thumbnail" src="${post.imagePath }" id="imagePath">
+					<div class="timeline-img-box mt-2 mx-2 border rounded">
+						<img class="image-thumbnail" src="${postWithComment.post.imagePath }" id="imagePath">
 					</div>
 					<div class="post-content-box my-2 title-text">
-						<div class="mx-3 mb-2 "> ${post.content } </div>
+						<div class="mx-3 mb-2 "> ${postWithComment.post.content } </div>
 					</div>
 					
 					<div class="like-comment-box mt-2 mx-3">
@@ -52,12 +56,14 @@
 						<div class="title-text pb-2"><i class="bi bi-suit-heart-fill"></i> 10개</div>
 						<!-- /좋아요 -->
 						<!-- 코멘트 출력 -->
-						<div class="mt-2"> <span class="title-text"><b>아이디</b></span> 코멘트</div>
+						<c:forEach var="comment" items="${postWithComment.commentList }">
+						<div class="mt-2"> <span class="title-text"><b>${comment.userName }</b></span> ${comment.content }</div>
+						</c:forEach>
 						<!-- /코멘트 출력 -->
 						<!--  코멘트 입력 -->
 						<div class="mt-2 d-flex input-group">
-							<input type="text" class="commentBox form-control title-text border-0" placeholder="comment" id="commentInput-${post.id }"> 
-							<button type="button" class="btn commentBtn btn-sm" data-post-id="${post.id }">게시</button>
+							<input type="text" class="commentBox form-control title-text border-0" placeholder="comment" id="commentInput-${postWithComment.post.id }"> 
+							<button type="button" class="btn commentBtn btn-sm" data-post-id="${postWithComment.post.id }">게시</button>
 						</div>
 						<!--  /코멘트 입력 -->
 					</div>

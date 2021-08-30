@@ -2,17 +2,15 @@ package com.yeye.marondalgram.post;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yeye.marondalgram.post.bo.PostBO;
-import com.yeye.marondalgram.post.model.Post;
+import com.yeye.marondalgram.post.model.PostWithComment;
 
 @Controller
 @RequestMapping("/marondalgram/post")
@@ -26,16 +24,18 @@ public class PostController {
 	//	return "marondalgram/post/timeline";
 	//}
 	
-	// 포스팅 리스트
-	@GetMapping("/timeline")
+	// 포스팅 리스트 + 코멘트 리스트
+	@RequestMapping("/timeline")
 	public String postList(Model model) {
 		
-		List<Post> postList = postBO.getPostList();
+		// 포스트 리스트 
+		List<PostWithComment> postList = postBO.getPostList();
 		
 		model.addAttribute("postList", postList);
+
+		
 		return "marondalgram/post/timeline";
 	}
-	
 	
 
 }

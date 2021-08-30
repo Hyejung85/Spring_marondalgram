@@ -39,15 +39,12 @@ public class PostRestController {
 		int count = postBO.addPost(userId, userName, content, file);
 		
 		Map<String, String> result = new HashMap<>();
-		
-		if(userId >= 1) {
 					
 			if(count == 1){
 				result.put("result", "success");
 			}else {
 				result.put("result", "fail");
 			}
-		}
 			return result;
 		
 	}
