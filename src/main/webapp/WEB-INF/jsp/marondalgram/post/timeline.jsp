@@ -52,9 +52,18 @@
 					</div>
 					
 					<div class="like-comment-box mt-2 mx-3">
-						<!-- 좋아요 -->
-						<div class="title-text pb-2"><i class="bi bi-suit-heart-fill"></i> 10개</div>
-						<!-- /좋아요 -->
+						<!-- 좋아요 출력 -->
+						
+						<div class="title-text pb-2" >
+							<!-- 싫어요 -->
+							<i class="dislike bi bi-suit-heart" id="dislike-${postWithComment.post.id }" data-post-id="${postWithComment.post.id }"></i>
+							<!-- 좋아요 -->
+							<i class="like bi bi-suit-heart-fill d-none" id="like-${postWithComment.post.id }" data-post-id="${postWithComment.post.id }"></i> 
+							<!-- 좋아요 갯수 -->
+							10개
+						</div>
+						
+						<!-- /좋아요 출력-->
 						<!-- 코멘트 출력 -->
 						<c:forEach var="comment" items="${postWithComment.commentList }">
 						<div class="mt-2"> <span class="title-text"><b>${comment.userName }</b></span> ${comment.content }</div>
@@ -77,9 +86,10 @@
 	</div>
 	<script>
 	
-	// 포스팅 저장
+	
 	 $(document).ready(function(){ 
-		 
+		 		 
+		// 포스팅 저장 
 		 $("#saveBtn").on("click", function(){
 		 let content = $("#contentInput").val().trim();
 		 
@@ -151,11 +161,63 @@
 			 });
 		 });
 		 
-		// 파일 인풋 이미지 클릭 이벤트
+		 // 파일 인풋 이미지 클릭 이벤트
 		 $("#imageUploadBtn").on("click",function(){
 			 $("#fileInput").click();
 		 });
-		
+		 
+		 // 좋아요
+		 $(".dislike").on("click",function(){	
+			 var postId = $(this).data("post-id");	
+			 var dislike = $("dislike-"+postId).val();
+			$("#dislike-"+ postId).addClass("d-none");
+			$("#like-"+ postId).removeClass("d-none");
+		 
+			 $.ajax({
+				type:"get",
+				url:"/marondalgram/post/like",
+				data:{"postId":postId},
+				success:function(data){
+					if(data.result == "success"){
+						alert("좋아요!");
+						
+					}else{
+						alert("like실패");
+					}
+				},
+				error:function(e){
+					alert("error");
+				}
+			 });
+		 
+		 });
+		 
+		 // 좋아요 취소
+		 $(".like").on("click",function(){
+			 
+			 var postId = $(this).data("post-id");	
+			 var like = $("like-"+postId).val();
+			$("#like-"+ postId).addClass("d-none");
+			$("#dislike-"+ postId).removeClass("d-none");
+			
+			$.ajax({
+				type:"get",
+				url:"/marondalgram/post/dislike",
+				data:{"id": id},
+				success:function(data){
+					if(data.Result == "success"){
+						alert("좋아요 취소");
+					}else{
+						alert("좋아요 취소 실패 <br> 다시 시도해 주세요.");
+					}
+				},
+				error:function(e){
+					alert("error");
+				}
+			});
+		 });
+		 
+		 
 	 });
 	 
 	</script>
