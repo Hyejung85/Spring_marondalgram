@@ -19,6 +19,16 @@
  			, now()
  		)
  	</insert>
+ 	<select id="selectCountLike" parameterType="map" resultType="int">
+ 		SELECT
+ 			count(1)
+ 		FROM
+ 			`like`
+ 		WHERE
+ 			`postId` = #{postId}
+ 			AND
+ 			`userId` = #{userId}
+ 	</select>
  	<delete id="deleteLikeById" parameterType="int">
  		DELETE
  		FROM

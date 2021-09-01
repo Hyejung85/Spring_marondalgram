@@ -102,6 +102,7 @@
 				}
 				if(password != passwordCheck){
 					$("#errorPassword").removeClass("d-none");
+					
 				}
 				
 				

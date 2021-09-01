@@ -53,22 +53,32 @@
 					
 					<div class="like-comment-box mt-2 mx-3">
 						<!-- 좋아요 출력 -->
-						
 						<div class="title-text pb-2" >
-							<!-- 싫어요 -->
-							<i class="dislike bi bi-suit-heart" id="dislike-${postWithComment.post.id }" data-post-id="${postWithComment.post.id }"></i>
-							<!-- 좋아요 -->
-							<i class="like bi bi-suit-heart-fill d-none" id="like-${postWithComment.post.id }" data-post-id="${postWithComment.post.id }"></i> 
+							<c:choose>
+								<c:when test="${postWithComment.like }">
+								<!-- 풀하트 -->
+								<a href="#" class="likeBtn" data-post-id="${postWithComment.post.id }">
+									<i class="bi bi-suit-heart-fill text-danger" id="heartIcon-${postWithComment.post.id }"></i> 
+								</a>
+								</c:when>
+									<c:otherwise>
+									<!-- 빈하트 -->
+									<a href="#" class="dislikeBtn" data-post-id="${postWithComment.post.id }">
+										<i class="bi bi-suit-heart title-text" id="heartIcon-${postWithComment.post.id }"></i>
+									</a>
+									</c:otherwise>
+							</c:choose>
 							<!-- 좋아요 갯수 -->
-							10개
+							<b>Like 10개</b>
 						</div>
-						
 						<!-- /좋아요 출력-->
+						
 						<!-- 코멘트 출력 -->
 						<c:forEach var="comment" items="${postWithComment.commentList }">
 						<div class="mt-2"> <span class="title-text"><b>${comment.userName }</b></span> ${comment.content }</div>
 						</c:forEach>
 						<!-- /코멘트 출력 -->
+						
 						<!--  코멘트 입력 -->
 						<div class="mt-2 d-flex input-group">
 							<input type="text" class="commentBox form-control title-text border-0" placeholder="comment" id="commentInput-${postWithComment.post.id }"> 
@@ -167,22 +177,28 @@
 		 });
 		 
 		 // 좋아요
-		 $(".dislike").on("click",function(){	
+		 $(".dislikeBtn").on("click",function(e){	
+			 e.preventDefault();
 			 var postId = $(this).data("post-id");	
-			 var dislike = $("dislike-"+postId).val();
-			$("#dislike-"+ postId).addClass("d-none");
-			$("#like-"+ postId).removeClass("d-none");
-		 
+				
 			 $.ajax({
 				type:"get",
 				url:"/marondalgram/post/like",
 				data:{"postId":postId},
 				success:function(data){
-					if(data.result == "success"){
-						alert("좋아요!");
+					if(data.likeList == "success"){
+						if($("#heartIcon-"+postId).hasClass("bi-suit-heart")){
+							$("#heartIcon-"+postId).removeClass("bi-suit-heart");
+							$("#heartIcon-"+postId).addClass("bi-suit-heart-fill");
+							
+							$("#heartIcon-"+postId).removeClass("title-text");
+							$("#heartIcon-"+postId).addClass("text-danger");
+						}else{
+							
+						}
 						
 					}else{
-						alert("like실패");
+						alert("좋아요 입력 실패");
 					}
 				},
 				error:function(e){
@@ -193,12 +209,12 @@
 		 });
 		 
 		 // 좋아요 취소
-		 $(".like").on("click",function(){
-			 
-			 var postId = $(this).data("post-id");	
+		 $(".likeBtn").on("click",function(){ 
+			 var postId = $(this).data("post-id");
+			 var likeId = $(this).data("like-id");
 			 var like = $("like-"+postId).val();
-			$("#like-"+ postId).addClass("d-none");
-			$("#dislike-"+ postId).removeClass("d-none");
+				$("#like-"+ likeId).addClass("d-none");
+				$("#dislike-"+ postId).removeClass("d-none");
 			
 			$.ajax({
 				type:"get",

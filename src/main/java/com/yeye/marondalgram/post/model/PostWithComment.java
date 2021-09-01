@@ -8,8 +8,15 @@ import com.yeye.marondalgram.post.comment.model.Comment;
 public class PostWithComment {
 	private Post post;
 	private List<Comment> commentList;
+	private boolean isLike;
 	
 	
+	public boolean isLike() {
+		return isLike;
+	}
+	public void setLike(boolean isLike) {
+		this.isLike = isLike;
+	}
 	public Post getPost() {
 		return post;
 	}

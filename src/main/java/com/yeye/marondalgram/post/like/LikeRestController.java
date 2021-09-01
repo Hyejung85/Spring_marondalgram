@@ -35,9 +35,9 @@ public class LikeRestController {
 		int count = likeBO.like(postId, userId);
 		
 		if(count == 1) {
-			likeList.put("result", "success");
+			likeList.put("likeList", "success");
 		}else {
-			likeList.put("result","fail");
+			likeList.put("likeList","fail");
 		}
 		
 		return likeList;
@@ -47,11 +47,11 @@ public class LikeRestController {
 	// 좋아요 취소
 	@GetMapping("/dislike")
 	public Map<String, String> dislike(
-			@RequestParam("Id") int Id
+			@RequestParam("id") int id
 			){
 		
 		Map<String, String> dislikeList = new HashMap<>();
-		int count = likeBO.dislikeById(Id);
+		int count = likeBO.dislikeById(id);
 		
 		if(count == 1) {
 			dislikeList.put("result", "success");
