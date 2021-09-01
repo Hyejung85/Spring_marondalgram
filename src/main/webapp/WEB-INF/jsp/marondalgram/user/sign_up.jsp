@@ -92,6 +92,12 @@
 					alert("비밀번호를 입력해주세요");
 					return;
 				}
+				
+				if(password != passwordCheck){
+					$("#errorPassword").removeClass("d-none");
+				
+				}
+				
 				if(name == null || name == ""){
 					alert("이름을 입력해주세요");
 					return;
@@ -100,10 +106,7 @@
 					alert("이메일을 입력해주세요");
 					return;
 				}
-				if(password != passwordCheck){
-					$("#errorPassword").removeClass("d-none");
-					
-				}
+				
 				
 				
 				// 아이디 중복체크를 했는지?
