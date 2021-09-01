@@ -1,6 +1,8 @@
 package com.yeye.marondalgram.post.like;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yeye.marondalgram.post.like.bo.LikeBO;
+import com.yeye.marondalgram.post.model.PostWithComment;
 
 @RestController
 @RequestMapping("/marondalgram/post")
@@ -31,14 +34,15 @@ public class LikeRestController {
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
+		// 좋아요
 		Map<String, String> likeList = new HashMap<>();
-		int count = likeBO.like(postId, userId);
+		int like = likeBO.like(postId, userId);
 		
-		if(count == 1) {
+		if(like == 1) {
 			likeList.put("likeList", "success");
 		}else {
 			likeList.put("likeList","fail");
-		}
+			}
 		
 		return likeList;
 		
@@ -46,18 +50,22 @@ public class LikeRestController {
 	
 	// 좋아요 취소
 	@GetMapping("/dislike")
-	public Map<String, String> dislike(
-			@RequestParam("id") int id
-			){
+	public Map<String, String> dislike(@RequestParam("postId") int postId
+			, HttpServletRequest request){
 		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		// 싫어요
 		Map<String, String> dislikeList = new HashMap<>();
-		int count = likeBO.dislikeById(id);
+		int dislike = likeBO.dislike(postId,userId);
 		
-		if(count == 1) {
-			dislikeList.put("result", "success");
+		if(dislike == 1) {
+			dislikeList.put("dislikeList", "success");
 		}else {
-			dislikeList.put("result", "fail");
+			dislikeList.put("dislikeList", "fail");
 		}
 		return dislikeList;
 	}
+	
 }

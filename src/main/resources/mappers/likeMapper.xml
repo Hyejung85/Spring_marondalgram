@@ -29,11 +29,13 @@
  			AND
  			`userId` = #{userId}
  	</select>
- 	<delete id="deleteLikeById" parameterType="int">
+ 	<delete id="deleteLike" parameterType="int">
  		DELETE
  		FROM
  			`like`
- 		WHERE `id` = #{id}
- 	</delete>
- 
+ 		WHERE
+ 			`postId` = #{postId}
+ 			AND
+ 			`userId` = #{userId}
+ 	 </delete>
  </mapper>

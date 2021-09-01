@@ -21,6 +21,7 @@ public interface LikeDAO {
 			, @Param("userId") int userId);
  	
 	// 좋아요 취소
-	public int deleteLikeById(
-			@Param("id") int id);
+	public int deleteLike(
+			@Param("postId") int postId
+			, @Param("userId") int userId);
 }

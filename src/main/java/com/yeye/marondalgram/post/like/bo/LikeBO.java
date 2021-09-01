@@ -32,7 +32,7 @@ public class LikeBO {
 	}
 	
 	// 좋아요 취소
-	public int dislikeById(int id) {
-		return likeDAO.deleteLikeById(id);
+	public int dislike(int postId, int userId) {
+		return likeDAO.deleteLike(postId, userId);
 	}
 }

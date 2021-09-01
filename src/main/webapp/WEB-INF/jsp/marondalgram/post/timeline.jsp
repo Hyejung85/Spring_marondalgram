@@ -63,7 +63,7 @@
 								</c:when>
 									<c:otherwise>
 									<!-- 빈하트 -->
-									<a href="#" class="dislikeBtn" data-post-id="${postWithComment.post.id }">
+									<a href="#" class="likeBtn" data-post-id="${postWithComment.post.id }">
 										<i class="bi bi-suit-heart title-text" id="heartIcon-${postWithComment.post.id }"></i>
 									</a>
 									</c:otherwise>
@@ -177,61 +177,65 @@
 		 });
 		 
 		 // 좋아요
-		 $(".dislikeBtn").on("click",function(e){	
+		 $(".likeBtn").on("click",function(e){	
 			 e.preventDefault();
 			 var postId = $(this).data("post-id");	
+			 var id = $("#heartIcon-"+postId).val();
+			 
+			 
+			 // 빈하트 클릭했을때
+			 if($("#heartIcon-"+postId).hasClass("bi-suit-heart")){
 				
 			 $.ajax({
 				type:"get",
 				url:"/marondalgram/post/like",
 				data:{"postId":postId},
 				success:function(data){
-					if(data.likeList == "success"){
-						if($("#heartIcon-"+postId).hasClass("bi-suit-heart")){
-							$("#heartIcon-"+postId).removeClass("bi-suit-heart");
-							$("#heartIcon-"+postId).addClass("bi-suit-heart-fill");
-							
-							$("#heartIcon-"+postId).removeClass("title-text");
-							$("#heartIcon-"+postId).addClass("text-danger");
+						// 좋아요
+						if(data.likeList == "success"){
+							if($("#heartIcon-"+postId).hasClass("bi-suit-heart")){
+								$("#heartIcon-"+postId).removeClass("bi-suit-heart");
+								$("#heartIcon-"+postId).addClass("bi-suit-heart-fill");
+								
+								$("#heartIcon-"+postId).removeClass("title-text");
+								$("#heartIcon-"+postId).addClass("text-danger");
 						}else{
-							
-						}
-						
-					}else{
-						alert("좋아요 입력 실패");
-					}
+							alert("좋아요 입력 실패");
+							}
+						}				
 				},
 				error:function(e){
 					alert("error");
 				}
 			 });
+			 
+			 // 꽉찬 하트 클릭했을때 
+			 }else if($("#heartIcon-"+postId).hasClass("bi-suit-heart-fill")){
+				 $.ajax({
+					 type:"get",
+					 url:"/marondalgram/post/dislike",
+					 data:{"postId": postId},
+					 success:function(data){
+						 if(data.dislikeList == "success"){
+							 if($("#heartIcon-"+postId).hasClass("bi-suit-heart-fill")){
+									$("#heartIcon-"+postId).removeClass("bi-suit-heart-fill");
+									$("#heartIcon-"+postId).addClass("bi-suit-heart");
+									
+									$("#heartIcon-"+postId).removeClass("text-danger");
+									$("#heartIcon-"+postId).addClass("title-text");
+								}else{
+									alert("좋아요 취소 실패");
+								}
+						 }
+					 },
+					 error:function(e){
+						 alert("error");
+					 }
+				 });
+			 }
 		 
 		 });
-		 
-		 // 좋아요 취소
-		 $(".likeBtn").on("click",function(){ 
-			 var postId = $(this).data("post-id");
-			 var likeId = $(this).data("like-id");
-			 var like = $("like-"+postId).val();
-				$("#like-"+ likeId).addClass("d-none");
-				$("#dislike-"+ postId).removeClass("d-none");
-			
-			$.ajax({
-				type:"get",
-				url:"/marondalgram/post/dislike",
-				data:{"id": id},
-				success:function(data){
-					if(data.Result == "success"){
-						alert("좋아요 취소");
-					}else{
-						alert("좋아요 취소 실패 <br> 다시 시도해 주세요.");
-					}
-				},
-				error:function(e){
-					alert("error");
-				}
-			});
-		 });
+
 		 
 		 
 	 });
