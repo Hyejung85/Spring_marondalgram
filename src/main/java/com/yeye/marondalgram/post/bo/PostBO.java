@@ -64,6 +64,7 @@ public class PostBO {
 			// 좋아요가 된 상태인지
 			postWithComment.setLike(isLike);
 			
+			
 			postWithCommentList.add(postWithComment);
 		}
 			

@@ -37,9 +37,11 @@ public class LikeRestController {
 		// 좋아요
 		Map<String, String> likeList = new HashMap<>();
 		int like = likeBO.like(postId, userId);
+		int totalLike = likeBO.totalCount(postId);
 		
 		if(like == 1) {
 			likeList.put("likeList", "success");
+			likeList.put("totalLike", "totalLike");
 		}else {
 			likeList.put("likeList","fail");
 			}
@@ -59,13 +61,16 @@ public class LikeRestController {
 		// 싫어요
 		Map<String, String> dislikeList = new HashMap<>();
 		int dislike = likeBO.dislike(postId,userId);
+		int totalLike = likeBO.totalCount(postId);
 		
 		if(dislike == 1) {
 			dislikeList.put("dislikeList", "success");
+			dislikeList.put("totalLike", "totalLike");
 		}else {
 			dislikeList.put("dislikeList", "fail");
 		}
 		return dislikeList;
 	}
+	
 	
 }

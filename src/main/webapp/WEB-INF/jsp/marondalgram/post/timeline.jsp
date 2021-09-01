@@ -68,8 +68,8 @@
 									</a>
 									</c:otherwise>
 							</c:choose>
-							<!-- 좋아요 갯수 -->
-							<b>Like 10개</b>
+							<!-- 좋아요 갯수 : 수정 필요!!-->
+							<b>${totalLike } Like</b>
 						</div>
 						<!-- /좋아요 출력-->
 						

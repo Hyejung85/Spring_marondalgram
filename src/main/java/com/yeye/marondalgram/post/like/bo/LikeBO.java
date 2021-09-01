@@ -30,6 +30,10 @@ public class LikeBO {
 		}
 			
 	}
+	// 좋아요 갯수
+	public int totalCount(int postId) {
+		return likeDAO.selectTotalCountLike(postId);
+	}
 	
 	// 좋아요 취소
 	public int dislike(int postId, int userId) {
