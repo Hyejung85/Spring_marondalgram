@@ -41,7 +41,7 @@ public class LikeRestController {
 		
 		if(like == 1) {
 			likeList.put("likeList", "success");	
-			likeList.put("likeCount", "likeCount");
+			likeList.put("likeCount", likeCount);
 		}else {
 			likeList.put("likeList","fail");
 			}
@@ -65,7 +65,7 @@ public class LikeRestController {
 		
 		if(dislike == 1) {
 			dislikeList.put("dislikeList", "success");
-			dislikeList.put("likeCount", "likeCount");
+			dislikeList.put("likeCount", likeCount);
 		}else {
 			dislikeList.put("dislikeList", "fail");
 		}

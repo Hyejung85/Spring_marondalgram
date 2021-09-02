@@ -48,8 +48,8 @@
 						</div>
 					</div>
 					<!-- 이미지 -->
-					<div class="timeline-img-box mt-2 mx-2 border rounded" ">
-						<img class="image-thumbnail" src="${postWithComment.post.imagePath }" id="imagePath" data-poist-id="${postWithComment.post.id }">
+					<div class="timeline-img-box mt-2 mx-2 border rounded">
+						<img class="image-thumbnail" src="${postWithComment.post.imagePath }" id="imagePath" data-post-id="${postWithComment.post.id }">
 					</div>
 					<div class="post-content-box my-2 title-text">
 						<div class="mx-3 mb-2 "> ${postWithComment.post.content } </div>
@@ -140,7 +140,7 @@
 						alert("좋아요 입력 실패");
 						}
 					}	
-					$("#likeCount-"+postId).text(data.likeCount);
+					 $("#likeCount-"+postId).text(data.likeCount);
 			},
 			error:function(e){
 				alert("error");
@@ -172,6 +172,7 @@
 					 alert("error");
 				 }
 			 });
+			
 		 }
 	 
 	};
@@ -266,6 +267,7 @@
 		 
 		 // 이미지 더블클릭했을때도 라이크 온/오프
 		 $(".image-thumbnail").on("dblclick", function(){
+			
 			 var postId = $(this).data("post-id");	
 			 var id = $("#heartIcon-"+postId).val();
 			
