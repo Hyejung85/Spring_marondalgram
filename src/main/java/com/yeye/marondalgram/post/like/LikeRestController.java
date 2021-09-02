@@ -26,7 +26,7 @@ public class LikeRestController {
 	
 	// 좋아요 입력
 	@GetMapping("/like")
-	public Map<String, String> like(
+	public Map<String, Object> like(
 			@RequestParam("postId") int postId
 			, HttpServletRequest request){
 		
@@ -35,13 +35,13 @@ public class LikeRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		// 좋아요
-		Map<String, String> likeList = new HashMap<>();
+		Map<String, Object> likeList = new HashMap<>();
 		int like = likeBO.like(postId, userId);
-		int totalLike = likeBO.totalCount(postId);
+		int likeCount = likeBO.countLike(postId);
 		
 		if(like == 1) {
-			likeList.put("likeList", "success");
-			likeList.put("totalLike", "totalLike");
+			likeList.put("likeList", "success");	
+			likeList.put("likeCount", "likeCount");
 		}else {
 			likeList.put("likeList","fail");
 			}
@@ -52,20 +52,20 @@ public class LikeRestController {
 	
 	// 좋아요 취소
 	@GetMapping("/dislike")
-	public Map<String, String> dislike(@RequestParam("postId") int postId
+	public Map<String, Object> dislike(@RequestParam("postId") int postId
 			, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		// 싫어요
-		Map<String, String> dislikeList = new HashMap<>();
+		Map<String, Object> dislikeList = new HashMap<>();
 		int dislike = likeBO.dislike(postId,userId);
-		int totalLike = likeBO.totalCount(postId);
+		int likeCount = likeBO.countLike(postId);
 		
 		if(dislike == 1) {
 			dislikeList.put("dislikeList", "success");
-			dislikeList.put("totalLike", "totalLike");
+			dislikeList.put("likeCount", "likeCount");
 		}else {
 			dislikeList.put("dislikeList", "fail");
 		}

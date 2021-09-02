@@ -31,7 +31,7 @@
  			`userId` = #{userId}
  	</select>
  	<!--  좋아요 갯수 -->
- 	<select id="selectTotalCountLike" parameterType="int" resultType="int">
+ 	<select id="selectCountLikeByPostId" parameterType="int" resultType="int">
  		SELECT
  			count(1)
  		FROM 
@@ -39,7 +39,7 @@
  		WHERE
  			`postId` = #{postId}
  	</select>
- 	<delete id="deleteLike" parameterType="int">
+ 	<delete id="deleteLike" parameterType="map">
  		DELETE
  		FROM
  			`like`

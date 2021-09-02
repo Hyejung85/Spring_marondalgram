@@ -58,11 +58,16 @@ public class PostBO {
 			
 			
 			PostWithComment postWithComment = new PostWithComment();
+			// 좋아요 갯수
+			int likCount = likeBO.countLike(post.getId());
+			
 			postWithComment.setPost(post);
 			// 코멘트 리스트
 			postWithComment.setCommentList(commentList);
 			// 좋아요가 된 상태인지
 			postWithComment.setLike(isLike);
+			// 좋아요 갯수
+			postWithComment.setLikeCount(likCount);
 			
 			
 			postWithCommentList.add(postWithComment);

@@ -9,14 +9,15 @@ public class PostWithComment {
 	private Post post;
 	private List<Comment> commentList;
 	private boolean isLike;
-	private int totalLike;
+	private int likeCount;
 	
 	
-	public int getTotalLike() {
-		return totalLike;
+	
+	public int getLikeCount() {
+		return likeCount;
 	}
-	public void setTotalLike(int totalLike) {
-		this.totalLike = totalLike;
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
 	}
 	public boolean isLike() {
 		return isLike;

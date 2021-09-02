@@ -21,7 +21,7 @@ public interface LikeDAO {
 			, @Param("userId") int userId);
 	
 	// 좋아요 갯수
-	public int selectTotalCountLike(@Param("postId") int postId);
+	public int selectCountLikeByPostId(@Param("postId") int postId);
  	
 	// 좋아요 취소
 	public int deleteLike(

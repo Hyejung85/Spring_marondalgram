@@ -35,8 +35,7 @@ public class PostController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		List<PostWithComment> postList = postBO.getPostList(userId);
 		
-		// 라이크 갯수
-		
+				
 		model.addAttribute("postList", postList);
 
 		

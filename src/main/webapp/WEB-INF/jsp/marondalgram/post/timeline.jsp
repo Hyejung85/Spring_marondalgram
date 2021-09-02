@@ -42,10 +42,14 @@
 				<div class="timeline-box p-3 m-2 border rounded"> 
 					<div class="d-flex justify-content-between ml-2 mr-2">
 						<div class="title-text"><i class="bi bi-person-circle"></i> <b>${postWithComment.post.userName }</b></div>
-						<div class="title-text"><i class="bi bi-three-dots"></i></div>
+						<!-- 모어버튼 -->
+						<div class="title-text" >
+							<a href="#" class="moreBtn" data-toggle="modal" data-target="#deleteModal"><i class="bi bi-three-dots" ></i></a>
+						</div>
 					</div>
-					<div class="timeline-img-box mt-2 mx-2 border rounded">
-						<img class="image-thumbnail" src="${postWithComment.post.imagePath }" id="imagePath">
+					<!-- 이미지 -->
+					<div class="timeline-img-box mt-2 mx-2 border rounded" ">
+						<img class="image-thumbnail" src="${postWithComment.post.imagePath }" id="imagePath" data-poist-id="${postWithComment.post.id }">
 					</div>
 					<div class="post-content-box my-2 title-text">
 						<div class="mx-3 mb-2 "> ${postWithComment.post.content } </div>
@@ -68,8 +72,8 @@
 									</a>
 									</c:otherwise>
 							</c:choose>
-							<!-- 좋아요 갯수 : 수정 필요!!-->
-							<b>${totalLike } Like</b>
+							<!-- 좋아요 갯수-->
+							<b><span id="likeCount-${postWithComment.post.id }" data-post-id="${postWithComment.post.id }">${postWithComment.likeCount }</span>개 좋아요</b>
 						</div>
 						<!-- /좋아요 출력-->
 						
@@ -94,8 +98,83 @@
 		</section>
 		<c:import url="/WEB-INF/jsp/marondalgram/include/footer.jsp" />
 	</div>
-	<script>
 	
+	<button type="button" class="btn btn-primary" >
+	  Launch demo modal
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      
+	      <div class="modal-body text-center">
+	        <a href="#" data-post-id="">삭제하기</a> 
+	      </div>
+	      
+	    </div>
+	  </div>
+	</div>
+	
+	<script>
+	// 라이크 함수 생성
+	function processLike(postId){
+		 // 빈하트 클릭했을때
+		 if($("#heartIcon-"+postId).hasClass("bi-suit-heart")){
+			
+		 $.ajax({
+			type:"get",
+			url:"/marondalgram/post/like",
+			data:{"postId":postId},
+			success:function(data){
+					// 좋아요
+					if(data.likeList == "success"){
+						if($("#heartIcon-"+postId).hasClass("bi-suit-heart")){
+							$("#heartIcon-"+postId).removeClass("bi-suit-heart");
+							$("#heartIcon-"+postId).addClass("bi-suit-heart-fill");
+							
+							$("#heartIcon-"+postId).removeClass("title-text");
+							$("#heartIcon-"+postId).addClass("text-danger");
+			
+					}else{
+						alert("좋아요 입력 실패");
+						}
+					}	
+					$("#likeCount-"+postId).text(data.likeCount);
+			},
+			error:function(e){
+				alert("error");
+			}
+		 });
+		 
+		 // 꽉찬 하트 클릭했을때 
+		 }else if($("#heartIcon-"+postId).hasClass("bi-suit-heart-fill")){
+			 $.ajax({
+				 type:"get",
+				 url:"/marondalgram/post/dislike",
+				 data:{"postId": postId},
+				 success:function(data){
+					 if(data.dislikeList == "success"){
+						 if($("#heartIcon-"+postId).hasClass("bi-suit-heart-fill")){
+								$("#heartIcon-"+postId).removeClass("bi-suit-heart-fill");
+								$("#heartIcon-"+postId).addClass("bi-suit-heart");
+								
+								$("#heartIcon-"+postId).removeClass("text-danger");
+								$("#heartIcon-"+postId).addClass("title-text");
+					
+						}else{
+							alert("좋아요 취소 실패");
+						}
+					 }
+					 $("#likeCount-"+postId).text(data.likeCount);
+				 },
+				 error:function(e){
+					 alert("error");
+				 }
+			 });
+		 }
+	 
+	};
 	
 	 $(document).ready(function(){ 
 		 		 
@@ -182,58 +261,19 @@
 			 var postId = $(this).data("post-id");	
 			 var id = $("#heartIcon-"+postId).val();
 			 
-			 
-			 // 빈하트 클릭했을때
-			 if($("#heartIcon-"+postId).hasClass("bi-suit-heart")){
-				
-			 $.ajax({
-				type:"get",
-				url:"/marondalgram/post/like",
-				data:{"postId":postId},
-				success:function(data){
-						// 좋아요
-						if(data.likeList == "success"){
-							if($("#heartIcon-"+postId).hasClass("bi-suit-heart")){
-								$("#heartIcon-"+postId).removeClass("bi-suit-heart");
-								$("#heartIcon-"+postId).addClass("bi-suit-heart-fill");
-								
-								$("#heartIcon-"+postId).removeClass("title-text");
-								$("#heartIcon-"+postId).addClass("text-danger");
-						}else{
-							alert("좋아요 입력 실패");
-							}
-						}				
-				},
-				error:function(e){
-					alert("error");
-				}
-			 });
-			 
-			 // 꽉찬 하트 클릭했을때 
-			 }else if($("#heartIcon-"+postId).hasClass("bi-suit-heart-fill")){
-				 $.ajax({
-					 type:"get",
-					 url:"/marondalgram/post/dislike",
-					 data:{"postId": postId},
-					 success:function(data){
-						 if(data.dislikeList == "success"){
-							 if($("#heartIcon-"+postId).hasClass("bi-suit-heart-fill")){
-									$("#heartIcon-"+postId).removeClass("bi-suit-heart-fill");
-									$("#heartIcon-"+postId).addClass("bi-suit-heart");
-									
-									$("#heartIcon-"+postId).removeClass("text-danger");
-									$("#heartIcon-"+postId).addClass("title-text");
-								}else{
-									alert("좋아요 취소 실패");
-								}
-						 }
-					 },
-					 error:function(e){
-						 alert("error");
-					 }
-				 });
-			 }
+			 processLike(postId);
+		 });
 		 
+		 // 이미지 더블클릭했을때도 라이크 온/오프
+		 $(".image-thumbnail").on("dblclick", function(){
+			 var postId = $(this).data("post-id");	
+			 var id = $("#heartIcon-"+postId).val();
+			
+			 processLike(postId);
+		 });
+		 
+		 $(".moreBtn").on("click",function(){
+			 // postId를 모델에 삭제 버튼에 주입한다.
 		 });
 
 		 
