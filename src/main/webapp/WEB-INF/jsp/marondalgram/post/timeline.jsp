@@ -44,7 +44,7 @@
 						<div class="title-text"><i class="bi bi-person-circle"></i> <b>${postWithComment.post.userName }</b></div>
 						<!-- 모어버튼 -->
 						<div class="title-text" >
-							<a href="#" class="moreBtn title-text" data-toggle="modal" data-target="#deleteModal" ><i class="bi bi-three-dots" ></i></a>
+							<a href="#" class="moreBtn title-text" data-toggle="modal" data-target="#deleteModal" data-post-id="${postWithComment.post.id }"><i class="bi bi-three-dots" ></i></a>
 						</div>
 					</div>
 					<!-- 이미지 -->
@@ -96,19 +96,18 @@
 		<c:import url="/WEB-INF/jsp/marondalgram/include/footer.jsp" />
 	</div>
 
-
+	<!-- 모달의 a태그에 data-post-id값을 더보기 클릭시 마다 바꿔준다. -->
+	
 	<!-- Modal -->
-	<c:forEach var="postWithComment" items="${postList }" varStatus="status">
 	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
 	    <div class="modal-content"> 
 	      <div class="modal-body text-center">
-	        <a href="#" data-post-id="${postWithComment.post.id }" class="title-text"><b>삭제하기</b></a>
+	        <a href="#"  class="title-text" id="deleteBtn"><b>삭제하기</b></a>
 	      </div>      
 	    </div>
 	  </div>
 	</div>
-	</c:forEach>
 	
 	<script>
 	// 라이크 함수 생성
@@ -266,24 +265,32 @@
 		 });
 		 
 		 // 포스팅 삭제
-		 $(".modal-body").on("click",function(){
+		 $(".moreBtn").on("click",function(){
 			 var postId = $(this).data("post-id");
-			 
+ 			 // 모달에 postId 값을 주입한다.
+			 $("#deleteBtn").data("post-id", postId);		 
+		 });
+		 
+		 <!-- 모달의 a태그의 클릭 이벤트를 만들고, 그 안에서 post-id로 삭제를 진행한다. -->
+		 $("#deleteBtn").on("click", function(e){
+			 e.preventDefault();
+			var postId = $(this).data("post-id"); 
+			
 			 $.ajax({
-				type:"get",
-				url:"/marondalgram/post/delete",
-				data:{"id":postId},
-				success:function(data){
-					if(data.result == "success"){
-						locataion.reload();
-					}else{
-						alert("삭제 실패");
+					type:"get",
+					url:"/marondalgram/post/delete",
+					data:{"id":postId},
+					success:function(data){
+						if(data.result == "success"){
+							location.reload();
+						}else{
+							alert("삭제 실패");
+						}
+					},
+					error:function(e){
+						alert("error");
 					}
-				},
-				error:function(e){
-					alert("error");
-				}
-			 });
+				 });
 		 });
 
 		
