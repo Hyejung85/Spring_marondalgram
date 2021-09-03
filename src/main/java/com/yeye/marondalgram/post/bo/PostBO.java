@@ -76,5 +76,9 @@ public class PostBO {
 		return postWithCommentList;
 		
 	}
+	// 포스팅 삭제
+	public int deletePost(int id, int userId) {
+		return postDAO.deletePost(id, userId);
+	}
 	
 }

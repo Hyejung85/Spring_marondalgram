@@ -44,7 +44,7 @@
 						<div class="title-text"><i class="bi bi-person-circle"></i> <b>${postWithComment.post.userName }</b></div>
 						<!-- 모어버튼 -->
 						<div class="title-text" >
-							<a href="#" class="moreBtn" data-toggle="modal" data-target="#deleteModal"><i class="bi bi-three-dots" ></i></a>
+							<a href="#" class="moreBtn title-text" data-toggle="modal" data-target="#deleteModal" ><i class="bi bi-three-dots" ></i></a>
 						</div>
 					</div>
 					<!-- 이미지 -->
@@ -58,22 +58,20 @@
 					<div class="like-comment-box mt-2 mx-3">
 						<!-- 좋아요 출력 -->
 						<div class="title-text pb-2" >
+							<a href="#" class="likeBtn" data-post-id="${postWithComment.post.id }">
 							<c:choose>
 								<c:when test="${postWithComment.like }">
-								<!-- 풀하트 -->
-								<a href="#" class="likeBtn" data-post-id="${postWithComment.post.id }">
+									<!-- 풀하트 -->
 									<i class="bi bi-suit-heart-fill text-danger" id="heartIcon-${postWithComment.post.id }"></i> 
-								</a>
 								</c:when>
 									<c:otherwise>
 									<!-- 빈하트 -->
-									<a href="#" class="likeBtn" data-post-id="${postWithComment.post.id }">
 										<i class="bi bi-suit-heart title-text" id="heartIcon-${postWithComment.post.id }"></i>
-									</a>
 									</c:otherwise>
 							</c:choose>
+							</a>
 							<!-- 좋아요 갯수-->
-							<b><span id="likeCount-${postWithComment.post.id }" data-post-id="${postWithComment.post.id }">${postWithComment.likeCount }</span>개 좋아요</b>
+							<b><span id="likeCount-${postWithComment.post.id }" data-post-id="${postWithComment.post.id }">${postWithComment.likeCount }</span> Like</b>
 						</div>
 						<!-- /좋아요 출력-->
 						
@@ -93,28 +91,24 @@
 				</div>
 				</c:forEach>
 				<!-- /타임라인-->
-				
 			</div>	
 		</section>
 		<c:import url="/WEB-INF/jsp/marondalgram/include/footer.jsp" />
 	</div>
-	
-	<button type="button" class="btn btn-primary" >
-	  Launch demo modal
-	</button>
+
 
 	<!-- Modal -->
+	<c:forEach var="postWithComment" items="${postList }" varStatus="status">
 	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
-	    <div class="modal-content">
-	      
+	    <div class="modal-content"> 
 	      <div class="modal-body text-center">
-	        <a href="#" data-post-id="">삭제하기</a> 
-	      </div>
-	      
+	        <a href="#" data-post-id="${postWithComment.post.id }" class="title-text"><b>삭제하기</b></a>
+	      </div>      
 	    </div>
 	  </div>
 	</div>
+	</c:forEach>
 	
 	<script>
 	// 라이크 함수 생성
@@ -175,7 +169,7 @@
 			
 		 }
 	 
-	};
+	}
 	
 	 $(document).ready(function(){ 
 		 		 
@@ -260,25 +254,39 @@
 		 $(".likeBtn").on("click",function(e){	
 			 e.preventDefault();
 			 var postId = $(this).data("post-id");	
-			 var id = $("#heartIcon-"+postId).val();
 			 
 			 processLike(postId);
 		 });
 		 
 		 // 이미지 더블클릭했을때도 라이크 온/오프
 		 $(".image-thumbnail").on("dblclick", function(){
-			
 			 var postId = $(this).data("post-id");	
-			 var id = $("#heartIcon-"+postId).val();
 			
 			 processLike(postId);
 		 });
 		 
-		 $(".moreBtn").on("click",function(){
-			 // postId를 모델에 삭제 버튼에 주입한다.
+		 // 포스팅 삭제
+		 $(".modal-body").on("click",function(){
+			 var postId = $(this).data("post-id");
+			 
+			 $.ajax({
+				type:"get",
+				url:"/marondalgram/post/delete",
+				data:{"id":postId},
+				success:function(data){
+					if(data.result == "success"){
+						locataion.reload();
+					}else{
+						alert("삭제 실패");
+					}
+				},
+				error:function(e){
+					alert("error");
+				}
+			 });
 		 });
 
-		 
+		
 		 
 	 });
 	 
