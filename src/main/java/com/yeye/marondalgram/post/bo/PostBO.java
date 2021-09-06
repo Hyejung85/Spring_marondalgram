@@ -84,8 +84,9 @@ public class PostBO {
 	// 포스팅 삭제
 	public boolean deletePost(int postId, int userId) {
 		
+		// 파일 삭제
 		Post post = postDAO.selectPost(postId);
-		
+		// 포스트 삭제
 		int count = postDAO.deletePost(postId, userId);
 		
 		// 코멘트부터 삭제 실패하는지 확인

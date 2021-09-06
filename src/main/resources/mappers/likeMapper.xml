@@ -50,7 +50,7 @@
  	 </delete>
  	 <delete id="deleteLikeByPostId" parameterType="int">
  	 	DELETE FROM `like`
- 	 	WHETE `postId` = #{postId}
+ 	 	WHERE `postId` = #{postId}
  	 
  	 </delete>
  </mapper>

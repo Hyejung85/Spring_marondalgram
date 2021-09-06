@@ -58,7 +58,7 @@
 						<div class="mx-3 mb-2 "> ${postWithComment.post.content } </div>
 					</div>
 					
-					<div class="like-comment-box mt-2 mx-3">
+					<div class="like-comment-box mt-2 mx-2">
 						<!-- 좋아요 출력 -->
 						<div class="title-text pb-2" >
 							<a href="#" class="likeBtn" data-post-id="${postWithComment.post.id }">
@@ -222,6 +222,7 @@
 			
 			 var postId = $(this).data("post-id");
 			 var comment = $("#commentInput-"+ postId).val().trim(); 
+			 var userName = $(userName).val();
 			 
 			 if(comment == null || comment ==""){
 				 alert("코멘트를 입력하세요");
@@ -234,12 +235,14 @@
 				url:"/marondalgram/post/comment/create",
 				data:{"postId":postId, "content":comment},
 				success:function(data){
+					
 					if(data.result == "success"){
 						alert("코멘트 입력 성공");
-						location.href="/marondalgram/post/timeline";
+						location.href="/marondalgram/post/timeline";	
 					}else{
 						alert("코멘트 입력 실패");
 					}
+	
 				},
 				error:function(e){
 					alert("코멘트 입력 실패");
@@ -258,12 +261,13 @@
 			 var postId = $(this).data("post-id");	
 			 
 			 processLike(postId);
+			 
 		 });
 		 
 		 // 이미지 더블클릭했을때도 라이크 온&오프
 		 $(".image-thumbnail").on("dblclick", function(){
 			 var postId = $(this).data("post-id");	
-			
+			 
 			 processLike(postId);
 		 });
 		 
