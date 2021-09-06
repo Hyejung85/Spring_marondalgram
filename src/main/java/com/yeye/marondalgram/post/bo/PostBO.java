@@ -3,6 +3,8 @@ package com.yeye.marondalgram.post.bo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +31,9 @@ public class PostBO {
 	// 라이크
 	@Autowired
 	private LikeBO likeBO;
+	
+	// 로거 사용
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 포스트 작성
 	public int addPost(int userId, String userName, String content, MultipartFile file) {
@@ -77,8 +82,26 @@ public class PostBO {
 		
 	}
 	// 포스팅 삭제
-	public int deletePost(int id, int userId) {
-		return postDAO.deletePost(id, userId);
+	public boolean deletePost(int postId, int userId) {
+		
+		Post post = postDAO.selectPost(postId);
+		
+		int count = postDAO.deletePost(postId, userId);
+		
+		// 코멘트부터 삭제 실패하는지 확인
+		if(count != 1) {
+			return false;
+		}
+		// 파일 삭제
+		FileManagerService fileManagerSerive = new FileManagerService();
+		fileManagerSerive.removeFile(post.getImagePath());
+		
+		// 라이크, 코멘트 삭제
+		int likeCount = likeBO.deleteLike(postId);
+		int commentCount = commentBO.deleteComment(postId);
+		
+		
+		return true;
 	}
 	
 }

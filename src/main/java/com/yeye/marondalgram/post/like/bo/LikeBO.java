@@ -38,4 +38,8 @@ public class LikeBO {
 	public int dislike(int postId, int userId) {
 		return likeDAO.deleteLike(postId, userId);
 	}
+	// 좋아요 삭제
+	public int deleteLike(int postId) {
+		return likeDAO.deleteLikeByPostId(postId);
+	}
 }

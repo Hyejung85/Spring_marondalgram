@@ -37,6 +37,22 @@
 			`post`
 		ORDER BY `id` DESC
 	</select>
+	
+	<select id="selectPost" parameterType="int" resultType="com.yeye.marondalgram.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `userName`
+			, `content`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE `id` = #{id}
+		
+	</select>
+	
 	<delete id="deletePost" parameterType="int">
 		DELETE FROM `post`
 		WHERE 

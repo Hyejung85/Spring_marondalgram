@@ -19,4 +19,7 @@ public interface CommentDAO {
 		
 	// 코멘트 리스트
 		public List<Comment> selectCommentByPostId(@Param("postId") int postId);
+		
+	// 삭제	
+		public int deleteComment(@Param("postId") int postId);
 }

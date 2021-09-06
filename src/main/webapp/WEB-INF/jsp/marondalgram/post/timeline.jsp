@@ -43,9 +43,12 @@
 					<div class="d-flex justify-content-between ml-2 mr-2">
 						<div class="title-text"><i class="bi bi-person-circle"></i> <b>${postWithComment.post.userName }</b></div>
 						<!-- 모어버튼 -->
+						<!--  글의 userId와 세션의 userId가 일치하면 더보기 버튼 노출 -->
+						<c:if test="${postWithComment.post.userId eq userId }">
 						<div class="title-text" >
 							<a href="#" class="moreBtn title-text" data-toggle="modal" data-target="#deleteModal" data-post-id="${postWithComment.post.id }"><i class="bi bi-three-dots" ></i></a>
 						</div>
+						</c:if>
 					</div>
 					<!-- 이미지 -->
 					<div class="timeline-img-box mt-2 mx-2 border rounded">
@@ -257,21 +260,21 @@
 			 processLike(postId);
 		 });
 		 
-		 // 이미지 더블클릭했을때도 라이크 온/오프
+		 // 이미지 더블클릭했을때도 라이크 온&오프
 		 $(".image-thumbnail").on("dblclick", function(){
 			 var postId = $(this).data("post-id");	
 			
 			 processLike(postId);
 		 });
 		 
-		 // 포스팅 삭제
+		 // 포스팅 삭제(모달은 하나만 만들고, 모어버튼 클릭시에 모달에 postId를 주입한다.)
 		 $(".moreBtn").on("click",function(){
 			 var postId = $(this).data("post-id");
  			 // 모달에 postId 값을 주입한다.
 			 $("#deleteBtn").data("post-id", postId);		 
 		 });
 		 
-		 <!-- 모달의 a태그의 클릭 이벤트를 만들고, 그 안에서 post-id로 삭제를 진행한다. -->
+		 //모달의 a태그의 클릭 이벤트를 만들고, 그 안에서 post-id로 삭제를 진행한다.
 		 $("#deleteBtn").on("click", function(e){
 			 e.preventDefault();
 			var postId = $(this).data("post-id"); 
@@ -279,7 +282,7 @@
 			 $.ajax({
 					type:"get",
 					url:"/marondalgram/post/delete",
-					data:{"id":postId},
+					data:{"postId":postId},
 					success:function(data){
 						if(data.result == "success"){
 							location.reload();

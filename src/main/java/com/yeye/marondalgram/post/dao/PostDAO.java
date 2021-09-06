@@ -19,6 +19,9 @@ public interface PostDAO {
 	
 	// 포스팅 리스트
 	public List<Post> selectPostList();
+	
+	// 파일 삭제
+	public Post selectPost(@Param("id") int id);
 
 	// 포스팅 삭제
 	public int deletePost(

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yeye.marondalgram.post.bo.PostBO;
+import com.yeye.marondalgram.post.like.bo.LikeBO;
 
 @RestController
 @RequestMapping("/marondalgram/post")
@@ -21,6 +22,7 @@ public class PostRestController {
 	
 	@Autowired
 	private PostBO postBO;
+	
 	
 	// 포스트 작성
 	@RequestMapping("/create")
@@ -51,7 +53,7 @@ public class PostRestController {
 	// 포스트 삭제
 	@GetMapping("/delete")
 	public Map<String, String> delete(
-			@RequestParam("id") int id
+			@RequestParam("postId") int postId
 			, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
@@ -59,9 +61,7 @@ public class PostRestController {
 		
 		Map<String, String> result = new HashMap<>();
 		
-		int count = postBO.deletePost(id, userId);
-		
-		if(count == 1) {
+		if(postBO.deletePost(postId, userId)){
 			result.put("result", "success");
 		}else {
 			result.put("result", "fail");

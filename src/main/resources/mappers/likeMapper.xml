@@ -48,4 +48,9 @@
  			AND
  			`userId` = #{userId}
  	 </delete>
+ 	 <delete id="deleteLikeByPostId" parameterType="int">
+ 	 	DELETE FROM `like`
+ 	 	WHETE `postId` = #{postId}
+ 	 
+ 	 </delete>
  </mapper>
