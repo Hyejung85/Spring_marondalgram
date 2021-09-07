@@ -10,23 +10,24 @@
  - UI 기획
    - https://ovenapp.io/project/2DdGazYTvaOkT6kiQLOvr24B4PKJCd6w#pSbBv
  - DATABASE, URL 설계
+   - https://docs.google.com/spreadsheets/d/1ngU7RqFxe0wn-Lsxv4TIzdlYBDfw_SEi_k7X9BCJhEo/edit?usp=sharing 
  
 ### 주요기능
  - 회원가입
-   - package :
-   - view :
+   - package : [com.yeye.marondalgram.user.*] (https://github.com/Hyejung85/Spring_marondalgram_0817/tree/develope/src/main/java/com/yeye/marondalgram/user)
+   - view : [/webapp/WEB-INF/jsp/marondalgram/user/*] (https://github.com/Hyejung85/Spring_marondalgram_0817/tree/develope/src/main/webapp/WEB-INF/jsp/marondalgram/user)
  - 로그인
-   - package :
-   - view :
+   - package : [com.yeye.marondalgram.user.*] (https://github.com/Hyejung85/Spring_marondalgram_0817/tree/develope/src/main/java/com/yeye/marondalgram/user)
+   - view :  [/webapp/WEB-INF/jsp/marondalgram/user/*] (https://github.com/Hyejung85/Spring_marondalgram_0817/tree/develope/src/main/webapp/WEB-INF/jsp/marondalgram/user)
  - 이미지 첨부 글쓰기
-   - package :
-   - view :
+   - package : [com.yeye.marondalgram.post.*] (https://github.com/Hyejung85/Spring_marondalgram_0817/tree/develope/src/main/java/com/yeye/marondalgram/post)
+   - view :  [/webapp/WEB-INF/jsp/marondalgram/post/*] (https://github.com/Hyejung85/Spring_marondalgram_0817/tree/develope/src/main/webapp/WEB-INF/jsp/marondalgram/post)
  - 댓글
-   - package :
-   - view :
+   - package : [com.yeye.marondalgram.post.comment.*] (https://github.com/Hyejung85/Spring_marondalgram_0817/tree/develope/src/main/java/com/yeye/marondalgram/post/comment)
+   - view : [/webapp/WEB-INF/jsp/marondalgram/post/*] (https://github.com/Hyejung85/Spring_marondalgram_0817/tree/develope/src/main/webapp/WEB-INF/jsp/marondalgram/post)
  - 좋아요
-   - package :
-   - view :
+   - package : [com.yeye.marondalgram.post.like.*] (https://github.com/Hyejung85/Spring_marondalgram_0817/tree/develope/src/main/java/com/yeye/marondalgram/post/like)
+   - view : [/webapp/WEB-INF/jsp/marondalgram/post/*] (https://github.com/Hyejung85/Spring_marondalgram_0817/tree/develope/src/main/webapp/WEB-INF/jsp/marondalgram/post)
 
 ### 데모
  - 회원가입 및 로그인
