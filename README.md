@@ -31,6 +31,7 @@
 
 ### 데모
  - 회원가입 및 로그인
+   ![user](https://user-images.githubusercontent.com/86756576/132374309-a98aef39-bab5-4b28-a375-1efe1c892053.gif)
  - 이미지 첨부 글쓰기
  - 댓글쓰기
  - 좋아요
