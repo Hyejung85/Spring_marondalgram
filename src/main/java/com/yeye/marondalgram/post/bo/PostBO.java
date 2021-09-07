@@ -51,7 +51,7 @@ public class PostBO {
 	}
 	
 	// 포스팅 리스트 (+코멘트 +라이크)
-	public List<PostWithComment> getPostList(int userId) {
+	public List<PostWithComment> getPostList(Integer userId) {
 		List<Post> postList = postDAO.selectPostList();
 		
 		List<PostWithComment> postWithCommentList = new ArrayList<>();

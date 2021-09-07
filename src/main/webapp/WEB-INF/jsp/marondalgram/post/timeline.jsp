@@ -115,7 +115,7 @@
 	<script>
 	// 라이크 함수 생성
 	function processLike(postId){
-		 // 빈하트 클릭했을때
+		 <!--빈하트 클릭했을때-->
 		 if($("#heartIcon-"+postId).hasClass("bi-suit-heart")){
 			
 		 $.ajax({
@@ -143,7 +143,7 @@
 			}
 		 });
 		 
-		 // 꽉찬 하트 클릭했을때 
+		 <!-- 꽉찬 하트 클릭했을때 -->
 		 }else if($("#heartIcon-"+postId).hasClass("bi-suit-heart-fill")){
 			 $.ajax({
 				 type:"get",
@@ -171,6 +171,17 @@
 			
 		 }
 	 
+	}
+	
+	// 로그인이 되어있지 않은 사용일때 벨리데이션 함수
+	function processCheckLogin(userName){
+		
+		if(userName == null || userName == ""){
+			alert("로그인 후 이용가능합니다.");
+			location.href = "/marondalgram/user/signin_view";
+			return;
+		}
+		
 	}
 	
 	 $(document).ready(function(){ 
@@ -224,6 +235,8 @@
 			 var comment = $("#commentInput-"+ postId).val().trim(); 
 			 var userName = $(userName).val();
 			 
+			 processCheckLogin(userName);
+			 
 			 if(comment == null || comment ==""){
 				 alert("코멘트를 입력하세요");
 				 return;
@@ -259,15 +272,19 @@
 		 $(".likeBtn").on("click",function(e){	
 			 e.preventDefault();
 			 var postId = $(this).data("post-id");	
+			 var userName = $(userName).val();
 			 
+			 processCheckLogin(userName);
 			 processLike(postId);
 			 
 		 });
 		 
 		 // 이미지 더블클릭했을때도 라이크 온&오프
 		 $(".image-thumbnail").on("dblclick", function(){
-			 var postId = $(this).data("post-id");	
+			 var postId = $(this).data("post-id");
+			 var userName = $(userName).val();
 			 
+			 processCheckLogin(userName);
 			 processLike(postId);
 		 });
 		 

@@ -21,12 +21,7 @@ public class PermissionInterceptor implements HandlerInterceptor{
 		String uri = request.getRequestURI();
 		
 		// 로그인이 되어있지 않다면
-		if(session.getAttribute("userId") == null){
-			if(uri.startsWith("/marondalgram/post")) {
-				response.sendRedirect("/marondalgram/user/signin_view"); // 로그인 페이지로 이동한다.
-				return false;
-			}
-		} else {
+		if(session.getAttribute("userId") != null){
 			if(uri.startsWith("/marondalgram/user")) { // user관련 페이지 접근시
 				response.sendRedirect("/marondalgram/post/timeline"); // 포스트 페이지로 이동시킨다.
 				return false;

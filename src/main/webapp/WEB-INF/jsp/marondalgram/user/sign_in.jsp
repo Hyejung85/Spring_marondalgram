@@ -37,7 +37,7 @@
 				</div>
 			
 				<div class="sub-box d-flex pt-5 justify-content-center  w-100">
-					계정이 없으신가요?  <a href="/marondalgram/user/signup_view">가입하기</a>
+					계정이 없으신가요?<a class="ml-2" href="/marondalgram/user/signup_view">가입하기</a>
 				</div>
 			 </div>
 			</div>
