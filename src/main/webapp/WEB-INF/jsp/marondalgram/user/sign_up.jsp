@@ -95,6 +95,7 @@
 				
 				if(password != passwordCheck){
 					$("#errorPassword").removeClass("d-none");
+					return;
 				
 				}
 				
@@ -112,11 +113,13 @@
 				// 아이디 중복체크를 했는지?
 				if(isIdCheck == false){
 					alert("아이디 중복체크를 진행해주세요");
+					return;
 				}
 				
 				// 아이디가 중복되었는지, 되지 않았는지?
 				if(isDuplicate == true){
 					alert("아이디가 중복되었습니다");
+					return;
 				}
 				
 							

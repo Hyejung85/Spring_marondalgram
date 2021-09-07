@@ -174,9 +174,9 @@
 	}
 	
 	// 로그인이 되어있지 않은 사용일때 벨리데이션 함수
-	function processCheckLogin(userName){
+	function processCheckLogin(userId){
 		
-		if(userName == null || userName == ""){
+		if(userId == null || userId == ""){
 			alert("로그인 후 이용가능합니다.");
 			location.href = "/marondalgram/user/signin_view";
 			return;
@@ -233,9 +233,9 @@
 			
 			 var postId = $(this).data("post-id");
 			 var comment = $("#commentInput-"+ postId).val().trim(); 
-			 var userName = $(userName).val();
+			 var userId = $(userId).val();
 			 
-			 processCheckLogin(userName);
+			 processCheckLogin(userId);
 			 
 			 if(comment == null || comment ==""){
 				 alert("코멘트를 입력하세요");
@@ -272,9 +272,9 @@
 		 $(".likeBtn").on("click",function(e){	
 			 e.preventDefault();
 			 var postId = $(this).data("post-id");	
-			 var userName = $(userName).val();
+			 var userId = $(userId).val();
 			 
-			 processCheckLogin(userName);
+			 processCheckLogin(userId);
 			 processLike(postId);
 			 
 		 });
@@ -282,9 +282,9 @@
 		 // 이미지 더블클릭했을때도 라이크 온&오프
 		 $(".image-thumbnail").on("dblclick", function(){
 			 var postId = $(this).data("post-id");
-			 var userName = $(userName).val();
+			 var userId = $(userId).val();
 			 
-			 processCheckLogin(userName);
+			 processCheckLogin(userId);
 			 processLike(postId);
 		 });
 		 
