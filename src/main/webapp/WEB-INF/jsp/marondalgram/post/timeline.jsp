@@ -80,7 +80,17 @@
 						
 						<!-- 코멘트 출력 -->
 						<c:forEach var="comment" items="${postWithComment.commentList }">
-						<div class="mt-2"> <span class="title-text"><b>${comment.userName }</b></span> ${comment.content }</div>
+						<div class="d-flex">
+							<!-- 코멘트 내용 -->
+							<div class="mt-2"> <span class="title-text"><b>${comment.userName }</b></span> ${comment.content }</div>
+							<!-- 코멘트 삭제버튼 -->
+							<!-- 글의 userId와 세션의 userId가 일치하면 삭제 버튼 노출 -->
+							<c:if test="${comment.userId eq userId }">
+								<div class="mt-2">
+									<i class="deleteCommentBtn bi bi-x-square title-text ml-3" data-comment-id="${comment.id }"></i>
+								</div>
+							</c:if>
+						</div>
 						</c:forEach>
 						<!-- /코멘트 출력 -->
 						
@@ -173,7 +183,8 @@
 	 
 	}
 	
-	// 로그인이 되어있지 않은 사용일때 벨리데이션 함수
+	// 로그인이 되어있지 않은 사용자일때 벨리데이션 함수
+	var userId = "${userId}";
 	function processCheckLogin(userId){
 		
 		if(userId == null || userId == ""){
@@ -233,7 +244,6 @@
 			
 			 var postId = $(this).data("post-id");
 			 var comment = $("#commentInput-"+ postId).val().trim(); 
-			 var userId = $(userId).val();
 			 
 			 processCheckLogin(userId);
 			 
@@ -263,6 +273,29 @@
 			 });
 		 });
 		 
+		 // 코멘트 삭제
+		 $(".deleteCommentBtn").on("click",function(){
+			 var commentId = $(this).data("comment-id");
+			 $.ajax({
+					type:"get",
+					url:"/marondalgram/post/comment/delete",
+					data:{"id":commentId},
+					success:function(data){
+						
+						if(data.result == "success"){
+							alert("코멘트 삭제 성공");
+							location.href="/marondalgram/post/timeline";	
+						}else{
+							alert("코멘트 삭제 실패");
+						}
+		
+					},
+					error:function(e){
+						alert("error");
+					}
+				 });
+		 });
+		 
 		 // 파일 인풋 이미지 클릭 이벤트
 		 $("#imageUploadBtn").on("click",function(){
 			 $("#fileInput").click();
@@ -272,7 +305,6 @@
 		 $(".likeBtn").on("click",function(e){	
 			 e.preventDefault();
 			 var postId = $(this).data("post-id");	
-			 var userId = $(userId).val();
 			 
 			 processCheckLogin(userId);
 			 processLike(postId);
@@ -282,7 +314,6 @@
 		 // 이미지 더블클릭했을때도 라이크 온&오프
 		 $(".image-thumbnail").on("dblclick", function(){
 			 var postId = $(this).data("post-id");
-			 var userId = $(userId).val();
 			 
 			 processCheckLogin(userId);
 			 processLike(postId);
