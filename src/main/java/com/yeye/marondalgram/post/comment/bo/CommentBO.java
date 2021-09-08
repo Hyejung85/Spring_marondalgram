@@ -24,9 +24,13 @@ public class CommentBO {
 			return commentDAO.selectCommentByPostId(postId);
 		}
 		
-	
-	
+	// 코멘트 삭제 (포스트 삭제시)
 		public int deleteComment(int postId) {
 			return commentDAO.deleteComment(postId);
 		}
+	// 코멘트만 삭제
+		public int deleteCommentById(int id) {
+			return commentDAO.deleteCommentById(id);
+		}
+	
 }

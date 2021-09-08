@@ -44,4 +44,27 @@ public class CommentRestController {
 			return result;
 			
 		}
+		
+	// 코멘트만 삭제 (포스트와 함께 전체 삭제는 PostBO에 작성)
+		@GetMapping("/comment/delete")
+		public Map<String, String> deleteComment(
+				@RequestParam("id") int id
+				, HttpServletRequest request){
+			
+			HttpSession session = request.getSession();
+			String userName = (String)session.getAttribute("userName");
+			int userId = (Integer)session.getAttribute("userId");
+			
+			int count = commentBO.deleteCommentById(id);
+			
+			Map<String, String> result = new HashMap<>();
+			
+			if (count == 1) {
+				result.put("result", "success");
+			}else {
+				result.put("result", "fail");
+			}
+			return result;
+			
+		}
 }
