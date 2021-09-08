@@ -7,11 +7,11 @@
 <header class="d-flex justify-content-between align-items-center">
 		<div><h2 class="ml-3"><i class="bi bi-instagram mr-2"></i><a class="title-text" href="/marondalgram/post/timeline">Marondalgram</a></h2></div>
 		<c:choose>
-		<c:when test="${not empty userName }">
-			<div class="mr-3"><i class="bi bi-person-fill"></i> <b>${userName }님</b> <a href="/marondalgram/user/sign_out">로그아웃</a></div>
-		</c:when>
-		<c:otherwise>
-			<div class="mr-3"><a class="title-text" href="/marondalgram/user/signin_view"><b>Log-in</b></a></div>
-		</c:otherwise>
+			<c:when test="${not empty userName }">
+				<div class="mr-3"><i class="bi bi-person-fill"></i> <b>${userName }님</b> <a href="/marondalgram/user/sign_out">로그아웃</a></div>
+			</c:when>
+			<c:otherwise>
+				<div class="mr-3"><a class="title-text" href="/marondalgram/user/signin_view"><b>Log-in</b></a></div>
+			</c:otherwise>
 		</c:choose>
 </header>
