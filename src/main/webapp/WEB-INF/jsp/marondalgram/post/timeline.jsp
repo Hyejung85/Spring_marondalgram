@@ -245,7 +245,10 @@
 			 var postId = $(this).data("post-id");
 			 var comment = $("#commentInput-"+ postId).val().trim(); 
 			 
-			 processCheckLogin(userId);
+			 if(processCheckLogin(userId)){
+			 }else{
+				 return;
+			 }
 			 
 			 if(comment == null || comment ==""){
 				 alert("코멘트를 입력하세요");
@@ -306,7 +309,10 @@
 			 e.preventDefault();
 			 var postId = $(this).data("post-id");	
 			 
-			 processCheckLogin(userId);
+			 if(processCheckLogin(userId)){
+			 }else{
+				 return;
+			 }
 			 processLike(postId);
 			 
 		 });
@@ -315,7 +321,10 @@
 		 $(".image-thumbnail").on("dblclick", function(){
 			 var postId = $(this).data("post-id");
 			 
-			 processCheckLogin(userId);
+			 if(processCheckLogin(userId)){
+			 }else{
+				 return;
+			 }
 			 processLike(postId);
 		 });
 		 
