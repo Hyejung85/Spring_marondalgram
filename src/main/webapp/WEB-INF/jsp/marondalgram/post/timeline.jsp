@@ -240,8 +240,9 @@
 		 
 		 
 		 // 코멘트 저장
-		 $(".commentBtn").on("click",function(){
-			
+		 $(".commentBtn").on("click",function(e){
+			 
+			e.preventDefault();
 			 var postId = $(this).data("post-id");
 			 var comment = $("#commentInput-"+ postId).val().trim(); 
 			 
