@@ -192,7 +192,7 @@
 			location.href = "/marondalgram/user/signin_view";
 			return;
 		}
-		
+			
 	}
 	
 	 $(document).ready(function(){ 
@@ -246,10 +246,7 @@
 			 var postId = $(this).data("post-id");
 			 var comment = $("#commentInput-"+ postId).val().trim(); 
 			 
-			 if(processCheckLogin(userId)){
-			 }else{
-				 return;
-			 }
+			 processCheckLogin(userId);
 			 
 			 if(comment == null || comment ==""){
 				 alert("코멘트를 입력하세요");
@@ -310,10 +307,8 @@
 			 e.preventDefault();
 			 var postId = $(this).data("post-id");	
 			 
-			 if(processCheckLogin(userId)){
-			 }else{
-				 return;
-			 }
+			 processCheckLogin(userId);
+			 
 			 processLike(postId);
 			 
 		 });
@@ -322,10 +317,7 @@
 		 $(".image-thumbnail").on("dblclick", function(){
 			 var postId = $(this).data("post-id");
 			 
-			 if(processCheckLogin(userId)){
-			 }else{
-				 return;
-			 }
+			 processCheckLogin(userId);
 			 processLike(postId);
 		 });
 		 
