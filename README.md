@@ -34,8 +34,11 @@
  - 회원가입 및 로그인
    ![user](https://user-images.githubusercontent.com/86756576/132374309-a98aef39-bab5-4b28-a375-1efe1c892053.gif)
  - 이미지 첨부 글쓰기
+   ![post_insert](https://user-images.githubusercontent.com/86756576/137449881-22b0773e-f8f5-40a5-8dd5-59421662d208.gif)
  - 댓글쓰기
+   ![comment_insert](https://user-images.githubusercontent.com/86756576/137449949-13fab830-f949-40c2-afac-7e9d1eeb7be3.gif)
  - 좋아요
+   ![like](https://user-images.githubusercontent.com/86756576/137450066-f953be37-eeb8-4464-91bb-e870ec0ec37c.gif)
 
 ### 🔉외부 라이브러리 라이센스🔉
  - Tomcat [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) 
